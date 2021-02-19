@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using GameVote.Domain.Entities.Home.Interface;
 
-namespace GameVote.Domain.Entities
+namespace GameVote.Domain.Entities.Home
 {
     public class User : IdentityUser
     {
