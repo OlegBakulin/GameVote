@@ -6,7 +6,7 @@ using GameVote.Domain.Entities.Home.Interface;
 
 namespace GameVote.Domain.Entities
 {
-    class User : IdentityUser
+    public class User : IdentityUser
     {
         
     }

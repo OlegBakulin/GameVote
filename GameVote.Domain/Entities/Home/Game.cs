@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GameVote.Domain.Entities
 {
-    class Game : IGame
+    public class Game : IGame
     {
         public ulong Id { get; set; }
         public string Nazvanie { get; set; }
