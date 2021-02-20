@@ -13,6 +13,7 @@ namespace GameVote.Domain.Entities
         public float PriceRelise { get; set; }
         public float PriceNow { get; set; }        
         public string UrlGame { get; set; }
-        public string[] ImgGame { get; set; }
+        public string ImgGame { get; set; }
+        public string[] ScreenGame { get; set; }
     }
 }

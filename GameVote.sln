@@ -4,10 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameVote", "GameVote\GameVote.csproj", "{DE07D44E-D405-4D34-B71C-2F05691A9749}"
+	ProjectSection(ProjectDependencies) = postProject
+		{18FAE19B-0D53-4716-93B7-5580BA9A7BBD} = {18FAE19B-0D53-4716-93B7-5580BA9A7BBD}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{9944AAA7-E24F-4D15-BE4F-19FE4243A1C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameVote.Domain", "GameVote.Domain\GameVote.Domain.csproj", "{18FAE19B-0D53-4716-93B7-5580BA9A7BBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameVote.Domain", "GameVote.Domain\GameVote.Domain.csproj", "{18FAE19B-0D53-4716-93B7-5580BA9A7BBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
