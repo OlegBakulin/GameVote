@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="ViewComponents\" />
+    <Folder Include="Views\Home\IndexSlice\" />
   </ItemGroup>
 
   <ItemGroup>
