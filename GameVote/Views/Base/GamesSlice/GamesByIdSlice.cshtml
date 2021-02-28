@@ -1,4 +1,4 @@
-﻿@model GameVote.Domain.ViewModels.GamePlatformViewModel
+﻿@model GameVote.Domain.ViewModels.GamesForTitlePage
     <body>
         <div>
             <h4>GamePlatformViewModel</h4>
@@ -6,50 +6,50 @@
 
             <dl class="row">
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.PriceRelise)
+                    @Html.DisplayNameFor(model => model.Price)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.PriceRelise)
+                    @Html.DisplayFor(model => model.Price)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.PriceNow)
+                    @Html.DisplayNameFor(model => model.discountedPrice)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.PriceNow)
+                    @Html.DisplayFor(model => model.discountedPrice)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.DataRelise)
+                    @Html.DisplayNameFor(model => model.Release)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.DataRelise)
+                    @Html.DisplayFor(model => model.Release)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.DataLostSale)
+                    @Html.DisplayNameFor(model => model.Description)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.DataLostSale)
+                    @Html.DisplayFor(model => model.Description)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.PlatformGame)
+                    @Html.DisplayNameFor(model => model.Platform)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.PlatformGame)
+                    @Html.DisplayFor(model => model.Platform)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Games.Nazvanie)
+                    @Html.DisplayNameFor(model => model.Name)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Games.Nazvanie)
+                    @Html.DisplayFor(model => model.Name)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Games.ImgGame)
+                    @Html.DisplayNameFor(model => model.ImgGame)
                 </dt>
                 
 
             </dl>
         </div>
         <div>
-            <a href="" style="background-size:auto; background-image : url('../../../wwwroot/Image/Games/@Model.Games.ImgGame') " class="imgfaceparker">
+            <a href="" style="background-size:auto; background-image : url('../../../wwwroot/Image/Games/@Model.ImgGame') " class="imgfaceparker">
                 <img src="~/Image/Games/Pay Day 2/Pay Day 2.jpg" width="480" height="270" />
             </a>
         </div>
