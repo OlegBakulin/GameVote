@@ -7,7 +7,7 @@
                 <div class="header">
                     <img class="logo" src="/Image/Logo.jpg" alt="">
                     <a href="oproekte">О проекте</a>
-                    <a asp-controller="Home" asp-action="Index">Главная</a>
+                    <a asp-controller="Base" asp-action="Index">Главная</a>
                     <button class="login" value="Войти" style="font-size: 100px 40px 100px 100px" />
                     <text></text>
                 </div>
@@ -16,7 +16,7 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td><a><img src="~/Image/Games/@item.ImgGame" width="480" height="270" alt="@item.Nazvanie" /></a></td>
+                                <td><div><a><img src="~/Image/Games/@item.ImgGame" width="480" height="270" alt="@item.Nazvanie" /></a></div></td>
                                 <td>@item.Nazvanie</td>
                                 <td>@item.Id</td>
                                 <td><a href=@item.UrlOfficialSaitGame>Купить</a></td>

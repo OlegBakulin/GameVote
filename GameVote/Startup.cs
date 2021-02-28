@@ -1,3 +1,5 @@
+using GameVote.Clients.SliceGame;
+using GameVote.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,16 +13,12 @@ using System.Threading.Tasks;
 
 namespace GameVote
 {
-    public class Startup
+    public sealed record Startup(IConfiguration _configuration)
     {
-        private readonly IConfiguration _configuration;
-        public Startup (IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddScoped<ISliceGameServices, SliceGameClient>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -29,16 +27,21 @@ namespace GameVote
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseStaticFiles();
             app.UseRouting();
 
+            //app.UseAuthentication();
+            //app.UseAuthorization();
+
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default", 
-                    pattern:"{controller=Home}/{action=Index}/{id?}");
+                    name: "default",
+                    pattern: "{controller=Base}/{action=Index}/{id?}");
 
             });
         }
+    
     }
 }
