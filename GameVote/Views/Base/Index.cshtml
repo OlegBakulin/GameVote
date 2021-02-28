@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GameVote.Domain.ViewModels.GameViewModel>
+﻿@model IEnumerable<GameVote.Domain.ViewModels.GamesForTitlePage>
 <!DOCTYPE html>
 <html lang="en">
     <body>
@@ -16,11 +16,12 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td><div><a><img src="~/Image/Games/@item.ImgGame" width="480" height="270" alt="@item.Nazvanie" /></a></div></td>
-                                <td>@item.Nazvanie</td>
+                                <td><div><a><img src="~/Image/Games/@item.ImgGame" width="480" height="270" alt="@item.Name" /></a></div></td>
+                                <td>@item.Name</td>
                                 <td>@item.Id</td>
                                 <td><a href=@item.UrlOfficialSaitGame>Купить</a></td>
                                 <td>@Html.ActionLink("Детали", "GamesById", new { id = item.Id - 1 })</td>
+                                <hr/>
                             </tr>
                            
                         }
