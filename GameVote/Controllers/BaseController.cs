@@ -3,14 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GameVote.Domain.ViewModels;
-using GameVote.Domain.Entities.Home;
+using GameVote.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using GameVote.Services.DBServices.Interface;
 
 namespace GameVote.Controllers
 {
    
     public class BaseController : Controller
     {
+        private readonly IDBServices _iDBServices;
+        public BaseController(IDBServices dBServices) => _iDBServices = dBServices;
+        /*
         private readonly List<GameViewModel> games = new List<GameViewModel>
         {
             new GameViewModel
@@ -37,10 +41,10 @@ namespace GameVote.Controllers
                 Opisanie = @"   Вернитесь в мир очаровательных ужасов Little Nightmares II — приключенческой игры с нагнетанием саспенса. Вы играете за мальчика Моно, попавшего в мир, деформированный Передачей от далекой башни. /n
                                 Вместе с Шестой, девочкой в желтом плаще, ставшей его проводником, Моно пытается раскрыть темные тайны Маяка. В нелегком путешествии Моно и Шестая столкнутся со множеством новых угроз со стороны ужасных жителей этого мира.
                                 Осмелитесь ли вы противостоять этим новым маленьким кошмарам?",
-                /*
-                PriceRelise = 2149,
-                PriceNow = 2149,
-                */
+                
+                //PriceRelise = 2149,
+                //PriceNow = 2149,
+                
                 UrlOfficialSaitGame = "https://store.playstation.com/ru-ru/concept/232583",
                 ImgGame = @"LittleNightmaresII/LittleNightmaresII.jpg"
             }
@@ -67,15 +71,18 @@ namespace GameVote.Controllers
             },
 
         };
-        
+        */
         public IActionResult Index()
         {
+            var games = _iDBServices.GetGamesForTitlePage();
             return View(games);
         }
 
         [Route("{id}")]
         public IActionResult GamesById(int id)
         {
+            var game = _iDBServices.GetGamesForTitlePage().ElementAt(id);
+            /*
             var gameplatformnow = new GamePlatformViewModel
             {
                 DataLostSale = gameplatform.ElementAt(id).DataLostSale,
@@ -85,7 +92,8 @@ namespace GameVote.Controllers
                 PriceRelise = gameplatform.ElementAt(id).PriceRelise,
                 Games = games.ElementAt(id)
             };
-            return View(gameplatformnow);
+            */
+            return View(game);
         }
 
         public IActionResult GamesByIdSlice(int id)

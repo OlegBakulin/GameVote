@@ -1,5 +1,5 @@
-using GameVote.Clients.SliceGame;
-using GameVote.Interfaces;
+using GameVote.Services.DBServices;
+using GameVote.Services.DBServices.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -18,6 +18,8 @@ namespace GameVote
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddScoped<ISliceGameServices, SliceGameClient>();
+            services.AddScoped<IDBServices, DBServices>();
             services.AddScoped<ISliceGameServices, SliceGameClient>();
         }
 
