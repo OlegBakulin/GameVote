@@ -1,3 +1,5 @@
+using GameVote.Services.DBServices;
+using GameVote.Services.DBServices.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -21,6 +23,7 @@ namespace GameVote
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddScoped<IDBServices, DBServices>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
