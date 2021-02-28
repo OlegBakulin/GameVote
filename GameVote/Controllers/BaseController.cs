@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using GameVote.Domain.ViewModels;
 using GameVote.Domain.Entities.Home;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GameVote.Controllers
 {
    
-    public class HomeController : Controller
+    public class BaseController : Controller
     {
         private readonly List<GameViewModel> games = new List<GameViewModel>
         {
