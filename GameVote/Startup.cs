@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GameVote.Interfaces;
+using GameVote.Clients.SliceGame;
 
 namespace GameVote
 {
@@ -18,9 +20,8 @@ namespace GameVote
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddScoped<ISliceGameServices, SliceGameClient>();
-            services.AddScoped<IDBServices, DBServices>();
-            services.AddScoped<ISliceGameServices, SliceGameClient>();
+            services.AddSingleton<IDBServices, DBServices>();
+            //services.AddScoped<ISliceGameServices, SliceGameClient>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

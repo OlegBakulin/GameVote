@@ -12,13 +12,14 @@ namespace GameVote.Services.DBServices
 {
     public class DBServices : IDBServices
     {
-        private string connectionString = "Server = 127.0.0.1; Port=5555;Database=Vote;User Id = postgres; Password=123;";
+        private string connectionString = "Server = 127.0.0.1; Port=5432;Database=Vote;User Id = postgres; Password=123;";
         public List<GamesForTitlePage> GetGamesForTitlePage()
         {
             try
             {
                 using (var connection = new NpgsqlConnection(connectionString))
                 {
+                    
                     string query = @"SELECT game.id, platform.""name"", game.name, release,  game.description, localization, 
                     ""minAge"", ""modeGame"", ""seriesGame"", subtitle, ""typeGame"", ""urlOfficialSaitGame"", ""imgGame"",
                     platform.id, platform.""name"", platform.description,
@@ -50,14 +51,16 @@ namespace GameVote.Services.DBServices
                         }
                         )
                         .ToList();
-
                     return result;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+
                 return new List<GamesForTitlePage>
                 {
+
+
                     new GamesForTitlePage
                     {
                         Id = 1,
@@ -65,14 +68,14 @@ namespace GameVote.Services.DBServices
                         discountedPrice = 500,
                         Developer = new Developer
                         {
-                            Id = 1,
+                            Id = 1, //3
                             Name = "Dev1",
                             Description = "DevDes1"
                         },
                         Discount = 700,
                         Genre = new Genre
                         {
-                            Id = 1,
+                            Id = 1, //2
                             Name = "Gen1",
                             Description = "GenDes1"
                         },
@@ -82,14 +85,14 @@ namespace GameVote.Services.DBServices
                         ModeGame = 3,
                         Platform = new Platform
                         {
-                            Id = 1,
+                            Id = 1, //2
                             Name = "PS 1",
                             Description = "PS1Des1"
                         },
                         Price = 2000,
                         Publisher = new Publisher
                         {
-                            Id = 1,
+                            Id = 1, //3
                             Name = "Pub1",
                             Description = "PubDes1"
                         },
@@ -98,7 +101,7 @@ namespace GameVote.Services.DBServices
                         TypeGame = 1,
                         Store = new Store
                         {
-                            Id = 1,
+                            Id = 1, //1
                             Name = "PlayStation1",
                             Description = "PlayDes1"
                         },
