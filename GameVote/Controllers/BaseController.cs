@@ -78,7 +78,7 @@ namespace GameVote.Controllers
             return View(games);
         }
 
-        [Route("{id}")]
+        //[Route("{id}")]
         public IActionResult GamesById(int id)
         {
             var game = _iDBServices.GetGamesForTitlePage().ElementAt(id);
