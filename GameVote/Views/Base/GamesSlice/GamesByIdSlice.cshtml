@@ -1,0 +1,63 @@
+﻿@model GameVote.Domain.ViewModels.GamesForTitlePage
+    <body>
+        <div>
+            <h4>GamePlatformViewModel</h4>
+            <hr />
+
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.discountedPrice)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.discountedPrice)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Release)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Release)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Genre)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Genre)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Platform)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Platform)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ImgGame)
+                </dt>
+                
+
+            </dl>
+        </div>
+        <div>
+            <a href="" class="imgfaceparker">
+                <img src="~/Image/Games/Pay Day 2/Pay Day 2.jpg" width="480" height="270" />
+            </a>
+        </div>
+        
+    </body>
+    <!--
+    <div>
+          @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    -->
