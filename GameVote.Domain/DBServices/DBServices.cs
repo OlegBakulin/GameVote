@@ -19,7 +19,7 @@ namespace GameVote.Services.DBServices
             {
                 using (var connection = new NpgsqlConnection(connectionString))
                 {
-                    
+
                     string query = @"SELECT game.id, platform.""name"", game.name, release,  game.description, localization, 
                     ""minAge"", ""modeGame"", ""seriesGame"", subtitle, ""typeGame"", ""urlOfficialSaitGame"", ""imgGame"",
                     platform.id, platform.""name"", platform.description,
@@ -49,7 +49,7 @@ namespace GameVote.Services.DBServices
                             game.Publisher = publisher;
                             return game;
                         }
-                        )
+                        ).OrderBy(i => i.Id) 
                         .ToList();
                     return result;
                 }

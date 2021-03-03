@@ -7,6 +7,8 @@ namespace GameVote.Interfaces
 {
     public interface IFullGameServices
     {
+        IEnumerable<string> Get();
+        
         string Get(int id);
 
         Uri Post(string value);

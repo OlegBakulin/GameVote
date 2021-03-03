@@ -1,18 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GameVote.Interfaces;
 
 namespace GameVote.Controllers
 {
     [Route("Base")]
     [ApiController]
-    public class GameVoteIndexApiController : Controller
+    public class GameVoteApiController : Controller
     {
         private readonly ISliceGameServices _sliceGameServices;
-        public GameVoteIndexApiController(ISliceGameServices sliceGameServices) => _sliceGameServices = sliceGameServices;
+        public GameVoteApiController(ISliceGameServices sliceGameServices) => _sliceGameServices = sliceGameServices;
         
         [Route("Index")]
         [HttpGet]
