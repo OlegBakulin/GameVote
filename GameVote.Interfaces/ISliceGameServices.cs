@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using GameVote.Domain.ViewModels;
 
 namespace GameVote.Interfaces
 {
     public interface ISliceGameServices
     {
-        IEnumerable<string> Get();
+        IEnumerable<GamesForTitlePage> Get();
 
-        string Get(int id);
+        GamesForTitlePage Get(int id);
 
-        Uri Post(string value);
+        int Post(GamesForTitlePage newGame);
 
-        HttpStatusCode Update(int id, string value);
+        HttpStatusCode Update(int id, GamesForTitlePage newGame);
 
         HttpStatusCode Delete(int id);
     }

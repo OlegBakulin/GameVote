@@ -5,7 +5,7 @@ using System.Linq;
 using GameVote.Domain.ViewModels;
 using GameVote.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using GameVote.Services.DBServices.Interface;
+using GameVote.Domain.DBServices.Interface;
 
 namespace GameVote.Controllers
 {

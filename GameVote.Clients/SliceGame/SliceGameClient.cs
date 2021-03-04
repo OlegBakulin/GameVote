@@ -1,40 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using GameVote.Clients.Base;
-using GameVote.Interfaces;
+using GameVote.Domain.ViewModels;
 using Microsoft.Extensions.Configuration;
+using GameVote.Interfaces;
 
 namespace GameVote.Clients.SliceGame
 {
     public class SliceGameClient : BaseClient, ISliceGameServices
     {
-        public SliceGameClient (IConfiguration Configuration) : base(Configuration, "api/values")
+        protected readonly string ServiceAddress;
+        protected readonly HttpClient Client;
+        public SliceGameClient (IConfiguration Configuration, string ServiceAddres) : base(Configuration, "api/values")
         {
-        }
-        public HttpStatusCode Delete(int id)
-        {
-            throw new NotImplementedException();
         }
 
-        public IEnumerable<string> Get()
-        {
-            throw new NotImplementedException();
-        }
+        public HttpStatusCode Delete(int id) => Delete($"{_ServiceAddress}/{id}").StatusCode;
+       
 
-        public string Get(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<GamesForTitlePage> Get() => Get<IEnumerable<GamesForTitlePage>>(ServiceAddress);
 
-        public Uri Post(string value)
-        {
-            throw new NotImplementedException();
-        }
+        public GamesForTitlePage Get(int id) => Get<GamesForTitlePage>($"{ServiceAddress}/{id}");
 
-        public HttpStatusCode Update(int id, string value)
+        public int Post(GamesForTitlePage newGame) => Post(ServiceAddress, newGame).Content.ReadAsAsync<int>().Result;
+
+        public HttpStatusCode Update(int id, GamesForTitlePage newGame)
         {
-            throw new NotImplementedException();
+            try 
+            {
+                HttpStatusCode hscd = Delete(id);
+                int hscp = Post(newGame);
+                return hscd;
+            }
+            catch
+            {
+                HttpStatusCode hsce = HttpStatusCode.Conflict;
+                return hsce;
+            }
+
         }
     }
 }

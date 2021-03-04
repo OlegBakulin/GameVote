@@ -1,9 +1,9 @@
 ﻿using GameVote.Domain.Entities;
 using GameVote.Domain.Entities.Interfaces;
 
-namespace GameVote.Domain.ViewModels
+namespace GameVote.Domain.Entities.Interfaces
 {
-    public class GamesForTitlePage : Game, IGamesForTitlePage
+    public interface IGamesForTitlePage
     {
         public Store Store { get; set; }
         public decimal Price { get; set; }

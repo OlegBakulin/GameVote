@@ -14,11 +14,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameVote.Domain", "GameVote
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{8EF38E2D-B37F-45C8-A793-DE6941463006}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameVote.Interfaces", "GameVote.Interfaces\GameVote.Interfaces.csproj", "{CFF5F3CA-C00A-4B34-8CEA-4EE2B8223D2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameVote.Interfaces", "GameVote.Interfaces\GameVote.Interfaces.csproj", "{CFF5F3CA-C00A-4B34-8CEA-4EE2B8223D2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameVote.DAL", "GameVote.DAL\GameVote.DAL.csproj", "{520A3402-C382-4166-BF32-346BAFB3B9B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameVote.DAL", "GameVote.DAL\GameVote.DAL.csproj", "{520A3402-C382-4166-BF32-346BAFB3B9B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameVote.Clients", "GameVote.Clients\GameVote.Clients.csproj", "{54E22E3E-7AB4-4858-9C85-1892C6B2A7D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameVote.Clients", "GameVote.Clients\GameVote.Clients.csproj", "{54E22E3E-7AB4-4858-9C85-1892C6B2A7D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameVote.Services", "GameVote.Services\GameVote.Services.csproj", "{03F2F79E-4A22-40FE-AD53-F24892EC5A23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +48,10 @@ Global
 		{54E22E3E-7AB4-4858-9C85-1892C6B2A7D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54E22E3E-7AB4-4858-9C85-1892C6B2A7D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54E22E3E-7AB4-4858-9C85-1892C6B2A7D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03F2F79E-4A22-40FE-AD53-F24892EC5A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03F2F79E-4A22-40FE-AD53-F24892EC5A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03F2F79E-4A22-40FE-AD53-F24892EC5A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03F2F79E-4A22-40FE-AD53-F24892EC5A23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{CFF5F3CA-C00A-4B34-8CEA-4EE2B8223D2D} = {8EF38E2D-B37F-45C8-A793-DE6941463006}
 		{520A3402-C382-4166-BF32-346BAFB3B9B3} = {8EF38E2D-B37F-45C8-A793-DE6941463006}
 		{54E22E3E-7AB4-4858-9C85-1892C6B2A7D9} = {8EF38E2D-B37F-45C8-A793-DE6941463006}
+		{03F2F79E-4A22-40FE-AD53-F24892EC5A23} = {8EF38E2D-B37F-45C8-A793-DE6941463006}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {525DC16F-895B-45AC-AC2C-622D2343DF96}

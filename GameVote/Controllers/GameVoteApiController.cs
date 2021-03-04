@@ -1,47 +1,70 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using GameVote.Interfaces;
+//using System.Web.Http;
+using System.Collections.Generic;
+using GameVote.Domain.ViewModels;
+using System.Net.Http;
+using GameVote.Domain.Entities.Interfaces;
+using System.Net;
+using GameVote.Services.InMemory;
+using System.Collections;
 
 namespace GameVote.Controllers
 {
-    [Route("Base")]
+    [Route("Game")]
     [ApiController]
-    public class GameVoteApiController : Controller
+    public class GameVoteApiController : ControllerBase, ISliceGameServices
     {
         private readonly ISliceGameServices _sliceGameServices;
-        public GameVoteApiController(ISliceGameServices sliceGameServices) => _sliceGameServices = sliceGameServices;
-        
-        [Route("Index")]
+        private readonly IGamesForTitlePage _gamesForTitlePage;
+        public GameVoteApiController(IGamesForTitlePage gamesForTitlePage) => _gamesForTitlePage = gamesForTitlePage;
+        private readonly InMemorySliceGameServices memorySliceGameServices;
+        IEnumerable enumerable;
+        [Route("All")]
         [HttpGet]
-        public IActionResult Index()
+        public IEnumerable<GamesForTitlePage> Get()//IActionResult Index()
         {
-            var sliceGames = _sliceGameServices.Get();
-            return View(sliceGames);
+            var sliceGames = _gamesForTitlePage;
+
+            enumerable.GetEnumerator(_gamesForTitlePage);
+            //files(sliceGames);
+
+            
+            return sliceGames;//View(sliceGames);
         }
 
         // GET api/<GameVoteWebApiController>/5
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [Route("{id}")]
+        [HttpGet]
+        public GamesForTitlePage Get(int id)//IActionResult Get(int id)
         {
             var sliceGames = _sliceGameServices.Get(id);
-            return View(sliceGames);
+            return sliceGames;//View(sliceGames);
         }
 
         // POST api/<GameVoteWebApiController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public int Post(GamesForTitlePage newGame)//[FromBody] string value)
         {
+            HttpResponseMessage message = new HttpResponseMessage();
+            _sliceGameServices.Post(newGame);
+            RedirectToAction("Game/All");
+            return (int)message.StatusCode;
         }
-
+        
         // PUT api/<GameVoteWebApiController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public HttpStatusCode Update(int id, GamesForTitlePage newGame)//int id, [FromBody] string value)
         {
+            return HttpStatusCode.OK;
         }
 
         // DELETE api/<GameVoteWebApiController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Route("{id}")]
+        [HttpDelete]
+        public HttpStatusCode Delete(int id)
         {
+            return HttpStatusCode.OK;
         }
     }
 }
