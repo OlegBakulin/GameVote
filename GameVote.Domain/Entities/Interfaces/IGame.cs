@@ -1,11 +1,10 @@
-﻿using GameVote.Domain.Entities.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameVote.Domain.Entities
+namespace GameVote.Domain.Entities.Interfaces
 {
-    public class Game : IGame
+    public interface IGame
     {
         public int Id { get; set; }
         public Platform Platform { get; set; }
@@ -17,11 +16,11 @@ namespace GameVote.Domain.Entities
         public string Description { get; set; }
         public int Localization { get; set; }
         public int MinAge { get; set; }
-        public int ModeGame  { get; set; }
+        public int ModeGame { get; set; }
         public int SeriesGame { get; set; }
         public int Subtitle { get; set; }
         public int TypeGame { get; set; }
         public int UrlOfficialSaitGame { get; set; }
-        public int ImgGame { get; set; }        
+        public int ImgGame { get; set; }
     }
 }

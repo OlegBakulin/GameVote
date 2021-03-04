@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GameVote.Services.DBServices.Interface
+namespace GameVote.Domain.DBServices.Interface
 {
     public interface IDBServices
     {
