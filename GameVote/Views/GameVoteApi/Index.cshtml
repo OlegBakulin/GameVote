@@ -1,0 +1,33 @@
+﻿@model IEnumerable<string>
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <section>
+            <container>
+                <div class="header">
+                    <img class="logo" src="/Image/Logo.jpg" alt="">
+                    <a href="oproekte">О проекте</a>
+                    <a asp-controller="Base" asp-action="Index">Главная</a>
+                    <button class="login" value="Войти" style="font-size: 100px 40px 100px 100px" />
+                    <text></text>
+                </div>
+                <div class="games">
+                    <table class="tabelgames">
+                        @{ var i = 1; }
+                        @foreach (var value in Model)
+                        {
+                            <tr>
+                                <td>@(i++)</td>
+                                <td>@value</td>
+                                <td>
+                                    @Html.ActionLink("Детали", "ValueByID", new { id = i - 1 })
+                                    
+                                    </td>
+                                </tr>
+                        }
+                        </table>
+                </div>
+                            </container>
+        </section>
+    </body>
+</html>

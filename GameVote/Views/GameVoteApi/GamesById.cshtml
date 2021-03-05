@@ -1,0 +1,46 @@
+﻿@using GameVote.Domain.ViewModels
+@model GamesForTitlePage
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ValueByID</title>
+</head>
+<body>
+
+    <div>
+        <h4>ValueClient</h4>
+        <hr />
+        <dl class="dl-horizontal">
+        </dl>
+    </div>
+    <div>
+        @Model
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        <a asp-action="Index">Back to List</a>
+    </div>
+    <svg width="400" height="400" viewBox="0 0 168 168" class="donut">
+        <!--Значение r не трогать, является числом переведённым из Пи в %-->
+        <circle class="donut-hole" cx="42" cy="42" r="15.91549430918954" fill="#fff"></circle><!-- Внутренность диаграммы -->
+        <circle class="donut-ring" cx="42" cy="42" r="15.91549430918954" fill="transparent" stroke="#d2d3d4" stroke-width="3"></circle><!-- Серое кольцо диаграммы -->
+        <circle class="donut-segment" cx="42" cy="42" r="15.91549430918954" fill="transparent" stroke="red" stroke-width="32" stroke-dasharray="50 50" stroke-dashoffset="25"></circle><!-- Высота кольца в 2 раза больше радиуса для заполненой диаграммы. Тут значение stroke-dashoffset="25" не изменять! -->
+        <circle class="donut-segment" cx="42" cy="42" r="15.91549430918954" fill="transparent" stroke="green" stroke-width="16" stroke-dasharray="20 80" stroke-dashoffset="-25"></circle><!-- stroke-dasharray="20(залитая цветом часть) 80(не залитая цветом часть)" описывать всегда оба числа, так как они чередуются 1 круг-->
+        <circle class="donut-segment" cx="42" cy="42" r="15.91549430918954" fill="transparent" stroke="blue" stroke-width="4" stroke-dasharray="30 70" stroke-dashoffset="-45"></circle><!-- stroke-dashoffset="-45" отступ начала диаграммы, что бы не накладывались друг на друга, значение "-45" получаем из вычетания предыдущих значений "-45" = "-25" - "20" -->
+        <!-- unused 10% -->
+        <g class="chart-text">
+            <text x="30%" y="50%" class="chart-number">
+
+            </text>
+            <text x="20%" y="70%" class="chart-label">
+
+            </text>
+        </g>
+    </svg>
+</body>
+</html>

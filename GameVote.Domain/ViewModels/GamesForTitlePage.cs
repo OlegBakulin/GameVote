@@ -13,7 +13,10 @@ namespace GameVote.Domain.ViewModels
 
         public int discountedPrice { get; set; }
 
-        public HttpStatusCode Delete(int id) { }
+        public HttpStatusCode Delete(int id) 
+        {
+            throw new System.NotImplementedException();
+        }
 
         public IEnumerable<GamesForTitlePage> Get()
         {
