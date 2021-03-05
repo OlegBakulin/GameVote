@@ -1,5 +1,7 @@
 ﻿using GameVote.Domain.Entities;
 using GameVote.Domain.Entities.Interfaces;
+using System.Collections.Generic;
+using System.Net;
 
 namespace GameVote.Domain.ViewModels
 {
@@ -10,5 +12,27 @@ namespace GameVote.Domain.ViewModels
         public int Discount { get; set; }
 
         public int discountedPrice { get; set; }
+
+        public HttpStatusCode Delete(int id) { }
+
+        public IEnumerable<GamesForTitlePage> Get()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public GamesForTitlePage Get(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int Post(GamesForTitlePage newGame)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public HttpStatusCode Update(int id, GamesForTitlePage newGame)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
