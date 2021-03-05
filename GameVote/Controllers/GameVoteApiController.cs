@@ -16,8 +16,8 @@ namespace GameVote.Controllers
     public class GameVoteApiController : ControllerBase, ISliceGameServices
     {
         private readonly ISliceGameServices _sliceGameServices;
-        private readonly IGamesForTitlePage _gamesForTitlePage;
-        public GameVoteApiController(IGamesForTitlePage gamesForTitlePage) => _gamesForTitlePage = gamesForTitlePage;
+        private readonly List<GamesForTitlePage> _gamesForTitlePage;
+        public GameVoteApiController(List<GamesForTitlePage> gamesForTitlePage) => _gamesForTitlePage = gamesForTitlePage;
         private readonly InMemorySliceGameServices memorySliceGameServices;
         IEnumerable enumerable;
         [Route("All")]
@@ -26,7 +26,7 @@ namespace GameVote.Controllers
         {
             var sliceGames = _gamesForTitlePage;
 
-            enumerable.GetEnumerator(_gamesForTitlePage);
+            //enumerable.GetEnumerator(_gamesForTitlePage);
             //files(sliceGames);
 
             
