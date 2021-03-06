@@ -15,7 +15,7 @@ namespace GameVote.Domain.DTO.IDTO
         public decimal DiscountedPrice { get; set; }    //Цена сейчас
 
         public int UserVoteQuantity { get; set; }       //количество юзеров проголосовавших за игру
-        public decimal UserVotePrice { get; set; }      //голос ценой за которую юзеры готовы купить игру
+        public decimal UserVoteFullPrice { get; set; }      //голос ценой за которую юзеры готовы купить игру
     }
 }
  

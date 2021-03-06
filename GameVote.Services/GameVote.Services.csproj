@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GameVote.Domain\GameVote.Domain.csproj" />
     <ProjectReference Include="..\GameVote.Interfaces\GameVote.Interfaces.csproj" />
   </ItemGroup>
 

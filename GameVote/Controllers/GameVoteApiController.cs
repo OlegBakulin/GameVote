@@ -11,7 +11,7 @@ using System.Collections;
 
 namespace GameVote.Controllers
 {
-    //[Route("Game")]
+    [Route("Game")]
     [ApiController]
     public class GameVoteApiController : ControllerBase, ISliceGameServices
     {
@@ -19,8 +19,7 @@ namespace GameVote.Controllers
         private readonly List<GamesForTitlePage> _gamesForTitlePage;
         public GameVoteApiController(List<GamesForTitlePage> gamesForTitlePage) => _gamesForTitlePage = gamesForTitlePage;
         private readonly InMemorySliceGameServices memorySliceGameServices;
-        IEnumerable enumerable;
-        public int id;
+        
         //[Route("All")]
         [HttpGet]
         public IEnumerable<GamesForTitlePage> Get()//IActionResult Index()
@@ -35,8 +34,8 @@ namespace GameVote.Controllers
         }
 
         // GET api/<GameVoteWebApiController>/5
-        //[Route("{id}")]
-        [HttpGet]
+        //[Route]
+        [HttpGet("{id}")]
         public GamesForTitlePage Get(int id)//IActionResult Get(int id)
         {
             var sliceGames = _sliceGameServices.Get(id);

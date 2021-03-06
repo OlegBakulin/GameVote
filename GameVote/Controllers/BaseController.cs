@@ -81,7 +81,7 @@ namespace GameVote.Controllers
         //[Route("{id}")]
         public IActionResult GamesById(int id)
         {
-            var game = _iDBServices.GetGamesForTitlePage().ElementAt(id);
+            var game = _iDBServices.GetGamesForTitlePage().FirstOrDefault(i => i.Id == id );
             /*
             var gameplatformnow = new GamePlatformViewModel
             {
