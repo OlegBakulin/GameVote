@@ -5,7 +5,7 @@ using System.Linq;
 using GameVote.Domain.ViewModels;
 using GameVote.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using GameVote.Services.DBServices.Interface;
+using GameVote.Domain.DBServices.Interface;
 
 namespace GameVote.Controllers
 {
@@ -81,7 +81,7 @@ namespace GameVote.Controllers
         //[Route("{id}")]
         public IActionResult GamesById(int id)
         {
-            var game = _iDBServices.GetGamesForTitlePage().ElementAt(id);
+            var game = _iDBServices.GetGamesForTitlePage().FirstOrDefault(i => i.Id == id );
             /*
             var gameplatformnow = new GamePlatformViewModel
             {

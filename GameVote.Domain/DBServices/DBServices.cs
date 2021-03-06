@@ -1,14 +1,14 @@
 ﻿using Dapper;
 using GameVote.Domain.Entities;
 using GameVote.Domain.ViewModels;
-using GameVote.Services.DBServices.Interface;
+using GameVote.Domain.DBServices.Interface;
 using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GameVote.Services.DBServices
+namespace GameVote.Domain.DBServices
 {
     public class DBServices : IDBServices
     {
@@ -20,17 +20,47 @@ namespace GameVote.Services.DBServices
                 using (var connection = new NpgsqlConnection(connectionString))
                 {
 
-                    string query = @"SELECT game.id, platform.""name"", game.name, release,  game.description, localization, 
-                    ""minAge"", ""modeGame"", ""seriesGame"", subtitle, ""typeGame"", ""urlOfficialSaitGame"", ""imgGame"",
-                    platform.id, platform.""name"", platform.description,
-                    genre.id, genre.""name"", genre.description,
-                    developer.id, developer.""name"", developer.description,
-                    publisher.id, publisher.""name"", publisher.description
-                    FROM public.game as game
-                    LEFT join platform on game.""platformId"" = platform.id
-                    LEFT join genre on game.""genreId"" = genre.id
-                    LEFT join developer on game.""developerId"" = developer.id
-                    LEFT join publisher on game.""publisherId"" = publisher.id;";
+                    string query = @"
+SELECT game.id,
+platform.""name"",
+game.name, 
+release, 
+game.description, 
+localization, 
+                    
+""minAge"", 
+""modeGame"", 
+""seriesGame"", 
+subtitle, 
+""typeGame"", 
+""urlOfficialSaitGame"", 
+""imgGame"",
+                    
+platform.id, 
+platform.""name"", 
+platform.description,
+                    
+genre.id, 
+genre.""name"", 
+genre.description,
+                    
+developer.id, 
+developer.""name"", 
+developer.description,
+                    
+publisher.id, 
+publisher.""name"", 
+publisher.description
+                    
+FROM public.game as game
+                    
+LEFT join platform on game.""platformId"" = platform.id
+                    
+LEFT join genre on game.""genreId"" = genre.id
+                    
+LEFT join developer on game.""developerId"" = developer.id
+                    
+LEFT join publisher on game.""publisherId"" = publisher.id;";
 
                     connection.Open();
 
@@ -80,9 +110,9 @@ namespace GameVote.Services.DBServices
                             Description = "GenDes1"
                         },
                         Name = "Game1",
-                        Localization = 7, //7 region = Russia
+                        Localization = true, //7 region = Russia
                         MinAge = 12,
-                        ModeGame = 3,
+                        ModeGame = "3",
                         Platform = new Platform
                         {
                             Id = 1, //2
@@ -97,17 +127,17 @@ namespace GameVote.Services.DBServices
                             Description = "PubDes1"
                         },
                         Release = new DateTime(2001, 01, 21),
-                        SeriesGame = 1,
-                        TypeGame = 1,
+                        SeriesGame = "1",
+                        TypeGame = "1",
                         Store = new Store
                         {
                             Id = 1, //1
                             Name = "PlayStation1",
                             Description = "PlayDes1"
                         },
-                        Subtitle = 7,
-                        ImgGame = 1,
-                        UrlOfficialSaitGame = 1
+                        Subtitle = true,
+                        ImgGame = "1",
+                        UrlOfficialSaitGame = "1"
                     },
 
                     new GamesForTitlePage
@@ -129,9 +159,9 @@ namespace GameVote.Services.DBServices
                             Description = "GenDes2"
                         },
                         Name = "Game2",
-                        Localization = 7, //7 region = Russia
+                        Localization = true, //7 region = Russia
                         MinAge = 16,
-                        ModeGame = 1,
+                        ModeGame = "1",
                         Platform = new Platform
                         {
                             Id = 2,
@@ -146,17 +176,17 @@ namespace GameVote.Services.DBServices
                             Description = "PubDes2"
                         },
                         Release = new DateTime(2005, 03, 12),
-                        SeriesGame = 2,
-                        TypeGame = 2,
+                        SeriesGame = "2",
+                        TypeGame = "2",
                         Store = new Store
                         {
                             Id = 1,
                             Name = "PlayStation1",
                             Description = "PlayDes1"
                         },
-                        Subtitle = 7,
-                        ImgGame = 2,
-                        UrlOfficialSaitGame = 2
+                        Subtitle = true,
+                        ImgGame = "2",
+                        UrlOfficialSaitGame = "2"
                     },
 
                     new GamesForTitlePage
@@ -178,9 +208,9 @@ namespace GameVote.Services.DBServices
                             Description = "GenDes1"
                         },
                         Name = "Game3",
-                        Localization = 7, //7 region = Russia
+                        Localization = true, //7 region = Russia
                         MinAge = 10,
-                        ModeGame = 2,
+                        ModeGame = "2",
                         Platform = new Platform
                         {
                             Id = 3,
@@ -195,17 +225,17 @@ namespace GameVote.Services.DBServices
                             Description = "PubDes3"
                         },
                         Release = new DateTime(2011, 12, 10),
-                        SeriesGame = 3,
-                        TypeGame = 3,
+                        SeriesGame = "3",
+                        TypeGame = "3",
                         Store = new Store
                         {
                             Id = 2,
                             Name = "Steam2",
                             Description = "SteDes2"
                         },
-                        Subtitle = 7,
-                        ImgGame = 3,
-                        UrlOfficialSaitGame = 3
+                        Subtitle = true,
+                        ImgGame = "3",
+                        UrlOfficialSaitGame = "3"
                     },
 
                     new GamesForTitlePage
@@ -227,9 +257,9 @@ namespace GameVote.Services.DBServices
                             Description = "GenDes3"
                         },
                         Name = "Game4",
-                        Localization = 7, //7 region = Russia
+                        Localization = true, //7 region = Russia
                         MinAge = 18,
-                        ModeGame = 1,
+                        ModeGame = "1",
                         Platform = new Platform
                         {
                             Id = 2,
@@ -244,17 +274,17 @@ namespace GameVote.Services.DBServices
                             Description = "PubDes2"
                         },
                         Release = new DateTime(2020, 12, 10),
-                        SeriesGame = 1,
-                        TypeGame = 2,
+                        SeriesGame = "1",
+                        TypeGame = "2",
                         Store = new Store
                         {
                             Id = 1,
                             Name = "PlayStation1",
                             Description = "PlayDes1"
                         },
-                        Subtitle = 7,
-                        ImgGame = 4,
-                        UrlOfficialSaitGame = 4
+                        Subtitle = true,
+                        ImgGame = "4",
+                        UrlOfficialSaitGame = "4"
                     }
                 };
             }

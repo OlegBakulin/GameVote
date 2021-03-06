@@ -1,11 +1,10 @@
-﻿using GameVote.Domain.Entities.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameVote.Domain.Entities
+namespace GameVote.Domain.Entities.Interfaces
 {
-    public class Game : IGame
+    public interface IGame
     {
         public int Id { get; set; }
         public Platform Platform { get; set; }

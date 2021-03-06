@@ -1,17 +1,30 @@
-﻿@model GameVote.Domain.ViewModels.GamesForTitlePage
+﻿@using GameVote.Domain.ViewModels
+@model GamesForTitlePage
 
-    <!doctype html>
+@{
+    Layout = null;
+}
 
-    <html lang="en">
-        <head>
-            <meta charset="utf-8">
-            <title>Gamers</title>
-            <link rel="stylesheet" href="~/Style/style.css">
-        </head>
+<!DOCTYPE html>
 
-    <body>
-        
-    @await Html.PartialAsync("Partial/GamesByIdSlice")
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ValueByID</title>
+</head>
+<body>
+
+    <div>
+        <h4>ValueClient</h4>
+        <hr />
+        <dl class="dl-horizontal">
+        </dl>
+    </div>
+    <div>
+        @Model
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        <a asp-action="Index">Back to List</a>
+    </div>
     <svg width="400" height="400" viewBox="0 0 168 168" class="donut">
         <!--Значение r не трогать, является числом переведённым из Пи в %-->
         <circle class="donut-hole" cx="42" cy="42" r="15.91549430918954" fill="#fff"></circle><!-- Внутренность диаграммы -->

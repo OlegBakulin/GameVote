@@ -7,9 +7,11 @@
   <ItemGroup>
     <Folder Include="ViewComponents\" />
     <Folder Include="Views\Base\IndexSlice\" />
+    <Folder Include="Views\Shared\Partial\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
@@ -29,6 +31,7 @@
     <ProjectReference Include="..\GameVote.Clients\GameVote.Clients.csproj" />
     <ProjectReference Include="..\GameVote.Domain\GameVote.Domain.csproj" />
     <ProjectReference Include="..\GameVote.Interfaces\GameVote.Interfaces.csproj" />
+    <ProjectReference Include="..\GameVote.Services\GameVote.Services.csproj" />
   </ItemGroup>
 
 </Project>

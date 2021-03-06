@@ -7,7 +7,14 @@
                 <div class="header">
                     <img class="logo" src="/Image/Logo.jpg" alt="">
                     <a href="oproekte">О проекте</a>
-                    <a asp-controller="Base" asp-action="Index">Главная</a>
+                    <a asp-controller="GameVoteApi"
+                       asp-action="Get"
+                       asp-route-id="@Model.ElementAt(3)">
+                                                    <!--asp-route-order="name:Base"
+                                                   asp-route-returnUrl="@Context.Request.Path"
+                                                   -->
+                        Главная
+                    </a>
                     <button class="login" value="Войти" style="font-size: 100px 40px 100px 100px" />
                     <text></text>
                 </div>
@@ -20,7 +27,7 @@
                                 <td>@item.Name</td>
                                 <td>@item.Id</td>
                                 <td><a href="@item.UrlOfficialSaitGame">Купить</a></td>
-                                <td>@Html.ActionLink("Детали", "GamesById", new { id = item.Id - 1})</td>
+                                <td>@Html.ActionLink("Детали", "GamesById", new { id = item.Id})</td>
                                 
                             </tr>
                            <tr></tr>

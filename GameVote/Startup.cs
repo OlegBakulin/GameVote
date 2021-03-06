@@ -1,5 +1,5 @@
-using GameVote.Services.DBServices;
-using GameVote.Services.DBServices.Interface;
+using GameVote.Domain.DBServices;
+using GameVote.Domain.DBServices.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +12,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using GameVote.Interfaces;
 using GameVote.Clients.SliceGame;
+using GameVote.Services.InMemory;
+using GameVote.Domain.Entities.Interfaces;
+using GameVote.Domain.ViewModels;
 
 namespace GameVote
 {
@@ -21,7 +24,7 @@ namespace GameVote
         {
             services.AddMvc();
             services.AddSingleton<IDBServices, DBServices>();
-            //services.AddScoped<ISliceGameServices, SliceGameClient>();
+            services.AddSingleton<ISliceGameServices, InMemorySliceGameServices>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -42,8 +45,16 @@ namespace GameVote
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Base}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "defaultApi",
+                    pattern: "api/{controller}/{id?}");
 
             });
+            
+                       /* app.Run(async (context) =>
+                        {
+                            await context.Response.WriteAsync();
+                        });*/
         }
     
     }
