@@ -24,7 +24,7 @@ namespace GameVote
         {
             services.AddMvc();
             services.AddSingleton<IDBServices, DBServices>();
-            services.AddSingleton<IGamesForTitlePage, InMemorySliceGameServices>();
+            services.AddSingleton<ISliceGameServices, InMemorySliceGameServices>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,6 +50,11 @@ namespace GameVote
                     pattern: "api/{controller}/{id?}");
 
             });
+            
+                       /* app.Run(async (context) =>
+                        {
+                            await context.Response.WriteAsync();
+                        });*/
         }
     
     }

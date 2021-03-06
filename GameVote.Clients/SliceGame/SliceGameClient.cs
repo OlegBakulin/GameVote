@@ -17,8 +17,10 @@ namespace GameVote.Clients.SliceGame
         {
         }
 
-        public HttpStatusCode Delete(int id) => Delete($"{_ServiceAddress}/{id}").StatusCode;
-       
+        public bool Delete(int id)
+        {
+            return Delete($"{_ServiceAddress}/{id}").IsSuccessStatusCode;
+        }
 
         public IEnumerable<GamesForTitlePage> Get() => Get<IEnumerable<GamesForTitlePage>>(ServiceAddress);
 
@@ -26,18 +28,17 @@ namespace GameVote.Clients.SliceGame
 
         public int Post(GamesForTitlePage newGame) => Post(ServiceAddress, newGame).Content.ReadAsAsync<int>().Result;
 
-        public HttpStatusCode Update(int id, GamesForTitlePage newGame)
+        public bool Update(int id, GamesForTitlePage newGame)
         {
             try 
             {
-                HttpStatusCode hscd = Delete(id);
+                bool hscd = Delete(id);
                 int hscp = Post(newGame);
                 return hscd;
             }
             catch
             {
-                HttpStatusCode hsce = HttpStatusCode.Conflict;
-                return hsce;
+                return false;
             }
 
         }
