@@ -13,8 +13,8 @@ namespace GameVote.Interfaces
 
         int Post(GamesForTitlePage newGame);
 
-        HttpStatusCode Update(int id, GamesForTitlePage newGame);
+        bool Update(int id, GamesForTitlePage newGame);
 
-        HttpStatusCode Delete(int id);
+        bool Delete(int id);
     }
 }

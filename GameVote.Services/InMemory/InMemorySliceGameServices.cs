@@ -7,13 +7,15 @@ using GameVote.Domain;
 using GameVote.Domain.Entities.Interfaces;
 using GameVote.Domain.Entities;
 using GameVote.Domain.DBServices.Interface;
+using System.Linq;
 
 namespace GameVote.Services.InMemory
 {
-    public class InMemorySliceGameServices : IGamesForTitlePage, ISliceGameServices
+    public class InMemorySliceGameServices : ISliceGameServices
     {
-        public List<GamesForTitlePage> gamesForTitlePages;
         private readonly List<GamesForTitlePage> _gamesForTitlePages;
+        public List<GamesForTitlePage> gamesForTitlePages;
+        
 
         public Store Store { get; set; }
         public decimal Price { get; set; }
@@ -32,22 +34,48 @@ namespace GameVote.Services.InMemory
 
         public GamesForTitlePage Get(int id)
         {
-            throw new NotImplementedException();
+            return _gamesForTitlePages.FirstOrDefault(e => e.Id.Equals(id));
         }
 
         public int Post(GamesForTitlePage newGame)
         {
-            throw new NotImplementedException();
+            if (newGame is null)
+                throw new ArgumentNullException(nameof(newGame));
+
+            if (_gamesForTitlePages.Contains(newGame)) return newGame.Id;
+
+            newGame.Id = _gamesForTitlePages.Max(e => e.Id) + 1;
+            _gamesForTitlePages.Add(newGame);
+            return newGame.Id;
         }
 
-        public HttpStatusCode Update(int id, GamesForTitlePage newGame)
+        public bool Update(int id, GamesForTitlePage newGame)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var geme = Get(id);
+                geme = newGame;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public HttpStatusCode Delete(int id)
+        public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var geme = Get(id);
+                if (geme is null) return false;
+                _gamesForTitlePages.Remove(geme);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

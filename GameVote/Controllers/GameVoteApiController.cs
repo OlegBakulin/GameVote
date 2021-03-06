@@ -16,15 +16,17 @@ namespace GameVote.Controllers
     public class GameVoteApiController : ControllerBase, ISliceGameServices
     {
         private readonly ISliceGameServices _sliceGameServices;
+        public GameVoteApiController(ISliceGameServices gamesForTitlePage) => _sliceGameServices = gamesForTitlePage;
+        
+        
         private readonly List<GamesForTitlePage> _gamesForTitlePage;
-        public GameVoteApiController(List<GamesForTitlePage> gamesForTitlePage) => _gamesForTitlePage = gamesForTitlePage;
         private readonly InMemorySliceGameServices memorySliceGameServices;
         
-        //[Route("All")]
+        [Route("All")]
         [HttpGet]
         public IEnumerable<GamesForTitlePage> Get()//IActionResult Index()
         {
-            var sliceGames = _gamesForTitlePage;
+            var sliceGames = _sliceGameServices.Get();
 
             //enumerable.GetEnumerator(_gamesForTitlePage);
             //files(sliceGames);
@@ -34,7 +36,7 @@ namespace GameVote.Controllers
         }
 
         // GET api/<GameVoteWebApiController>/5
-        //[Route]
+        [Route("{id}")]
         [HttpGet("{id}")]
         public GamesForTitlePage Get(int id)//IActionResult Get(int id)
         {
@@ -54,17 +56,17 @@ namespace GameVote.Controllers
         
         // PUT api/<GameVoteWebApiController>/5
         [HttpPut]
-        public HttpStatusCode Update(int id, GamesForTitlePage newGame)//int id, [FromBody] string value)
+        public bool Update(int id, GamesForTitlePage newGame)//int id, [FromBody] string value)
         {
-            return HttpStatusCode.OK;
+            return true;
         }
 
         // DELETE api/<GameVoteWebApiController>/5
         [Route("{id}")]
         [HttpDelete]
-        public HttpStatusCode Delete(int id)
+        public bool Delete(int id)
         {
-            return HttpStatusCode.OK;
+            return true;
         }
     }
 }
