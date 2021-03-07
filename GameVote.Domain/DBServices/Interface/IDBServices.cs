@@ -9,7 +9,7 @@ namespace GameVote.Services.DBServices.Interface
 {
     public interface IDBServices
     {
-        public List<GamesForTitlePage> GetGamesForTitlePage();
+        public List<GamesForTitlePage> GetGamesForTitlePage(int gameId);
 
     }
 }
