@@ -4,21 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using GameVote.Domain.ViewModels;
 using GameVote.Domain.Entities;
-using GameVote.Services.DBServices;
+using Microsoft.AspNetCore.Mvc;
+using GameVote.Services.DBServices.Interface;
 
 namespace GameVote.Controllers
 {
-    public class HomeController : Controller
+   
+    public class BaseController : Controller
     {
-
-        private readonly List<GamesForTitlePage> games;
-        private readonly DBServices _dBServices;
-        public HomeController (DBServices dbservices)
+        private readonly IDBServices _iDBServices;
+        public BaseController(IDBServices dBServices) => _iDBServices = dBServices;
+        /*
+        private readonly List<GameViewModel> games = new List<GameViewModel>
         {
-            _dBServices = dbservices;
-           
-        }
-        /*{
             new GameViewModel
             {
                 Id = 1,
@@ -75,17 +73,17 @@ namespace GameVote.Controllers
         };
         */
         public IActionResult Index()
-        { 
-            var gamesAll = _dBServices.GetGamesForTitlePage();
-            return View(gamesAll);
+        {
+            var games = _iDBServices.GetGamesForTitlePage();
+            return View(games);
         }
 
         [Route("{id}")]
         public IActionResult GamesById(int id)
         {
-            var gamesAll = _dBServices.GetGamesForTitlePage();
-            var gameplatformnow = gamesAll.ElementAt(id);// games.ElementAt(id);
+            var game = _iDBServices.GetGamesForTitlePage().ElementAt(id);
             /*
+            var gameplatformnow = new GamePlatformViewModel
             {
                 g = gameplatform.ElementAt(id).DataLostSale,
                 DataRelise = gameplatform.ElementAt(id).DataRelise,
@@ -95,7 +93,7 @@ namespace GameVote.Controllers
                 Games = games.ElementAt(id)
             };
             */
-            return View(gameplatformnow);
+            return View(game);
         }
 
         public IActionResult GamesByIdSlice(int id)
