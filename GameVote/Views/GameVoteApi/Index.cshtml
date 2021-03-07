@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GameVote.Domain.DTO.DTOGameForTitlePage>
+﻿@model IEnumerable<GameVote.Domain.ViewModels.GamesForTitlePage>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -21,15 +21,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiscountedPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserVoteQuantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserVoteFullPrice)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -51,15 +43,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiscountedPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserVoteQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserVoteFullPrice)
-            </td>
+            
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
