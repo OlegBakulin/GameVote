@@ -12,7 +12,7 @@ namespace GameVote.Services.DBServices
 {
     public class DBServices : IDBServices
     {
-        private string connectionString = "Server = 127.0.0.1; Port=5555;Database=Vote;User Id = postgres; Password=123;";
+        private string connectionString = "Server = 127.0.0.1; Port=5432;Database=Vote;User Id = postgres; Password=123;";
         public List<GamesForTitlePage> GetGamesForTitlePage(int gameId = 0, int storeId = 0)
         {
             var Prices = new
