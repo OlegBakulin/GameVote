@@ -13,7 +13,7 @@ namespace GameVote.Services.DBServices
     public class DBServices : IDBServices
     {
         private string connectionString = "Server = 127.0.0.1; Port=5555;Database=Vote;User Id = postgres; Password=123;";
-        public List<GamesForTitlePage> GetGamesForTitlePage(int gameId = 4)
+        public List<GamesForTitlePage> GetGamesForTitlePage(int gameId = 0, int storeId = 0)
         {
             var Prices = new
             {
@@ -74,8 +74,9 @@ FROM
   INNER JOIN public.developer ON(public.game.""developerId"" = public.developer.id)
   INNER JOIN public.store ON(public.""gamesInStore"".""storeId"" = public.store.id)
 WHERE
-  @gameId IS NULL OR
-  public.""gamesInStore"".""gameId"" = @gameId;
+  @gameId = 0 OR
+  (public.""gamesInStore"".""gameId"" = @gameId AND
+    public.""gamesInStore"".""storeId"" = @storeId);
 SELECT 
   public.game.id as ""GameId"",
   public.store.id as ""StoreId"",
@@ -86,8 +87,9 @@ FROM
   INNER JOIN public.game ON (public.vote.""gameId"" = public.game.id)
   INNER JOIN public.store ON(public.vote.""storeId"" = public.store.id)
 WHERE
-  @gameId IS NULL OR
-  public.""game"".""id"" = @gameId
+  @gameId = 0 OR
+  (public.""game"".""id"" = @gameId AND
+    public.""store"".""id"" = @storeId)
 GROUP BY
   public.vote.price,
   public.game.id,
@@ -97,7 +99,8 @@ GROUP BY
 
                     List<GamesForTitlePage> gamesForTitlePage;
                     List<DistributionOfVotesByPrice> votes;
-                    using (var result = connection.QueryMultiple(query,new { gameid = gameId }))
+                    using (var result = connection.QueryMultiple(query,new 
+                    { gameid = gameId, storeId = storeId}))
                     {
                         gamesForTitlePage = result.Read < GamesInStore,
                         GamesForTitlePage,
