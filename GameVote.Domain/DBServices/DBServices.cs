@@ -15,12 +15,6 @@ namespace GameVote.Services.DBServices
         private string connectionString = "Server = 127.0.0.1; Port=5555;Database=Vote;User Id = postgres; Password=123;";
         public List<GamesForTitlePage> GetGamesForTitlePage(int gameId = 0, int storeId = 0)
         {
-            var Prices = new
-            {
-                price = "",
-                discount = "",
-                discountedPrice = ""
-            };
             try
             {
                 using (var connection = new NpgsqlConnection(connectionString))
@@ -99,10 +93,10 @@ GROUP BY
 
                     List<GamesForTitlePage> gamesForTitlePage;
                     List<DistributionOfVotesByPrice> votes;
-                    using (var result = connection.QueryMultiple(query,new 
-                    { gameid = gameId, storeId = storeId}))
+                    using (var result = connection.QueryMultiple(query, new
+                    { gameid = gameId, storeid = storeId }))
                     {
-                        gamesForTitlePage = result.Read < GamesInStore,
+                        gamesForTitlePage = result.Read<GamesInStore,
                         GamesForTitlePage,
                         Platform,
                         Genre,
@@ -135,7 +129,7 @@ GROUP BY
                     return gamesForTitlePage;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new List<GamesForTitlePage>
                 {
@@ -335,6 +329,62 @@ GROUP BY
                         UrlOfficialSaitGame = 4
                     }
                 };
+            }
+        }
+
+        public bool InsertVote(Vote vote)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(connectionString))
+                {
+                    string query = @"
+INSERT INTO public.vote(
+""gameId"", ""storeId"", price, ""userId"")
+VALUES(@gameid, @storeid, @price, @userid); ";
+
+                    connection.Open();
+
+                    var result = connection.Query<Vote>(query,
+                        new {
+                            gameid = vote.Game.Id,
+                            storeid = vote.Store.Id,
+                            price = vote.Price,
+                            userid = vote.User.Id
+                        });
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public bool DeleteVote(Vote vote)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(connectionString))
+                {
+                    string query = @"
+DELETE FROM public.vote
+	WHERE ""gameId"" = @gameid and ""storeId"" = @storeid and ""userId"" = @userid ;";
+
+                    connection.Open();
+
+                    var result = connection.Query<Vote>(query,
+                        new
+                        {
+                            gameid = vote.Game.Id,
+                            storeid = vote.Store.Id,
+                            userid = vote.User.Id
+                        });
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }

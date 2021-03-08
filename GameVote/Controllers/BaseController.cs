@@ -75,6 +75,19 @@ namespace GameVote.Controllers
         public IActionResult Index()
         {
             var games = _iDBServices.GetGamesForTitlePage();
+            _iDBServices.InsertVote(new Vote
+            {
+                Game = new Game { Id = 5 },
+                Store = new Store { Id = 2 },
+                User = new User { Id = 3 },
+                Price = 200
+            });
+            _iDBServices.DeleteVote(new Vote
+            {
+                Game = new Game { Id = 5 },
+                Store = new Store { Id = 2 },
+                User = new User { Id = 3 },
+            });
             return View(games);
         }
 
