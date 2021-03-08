@@ -11,6 +11,6 @@ namespace GameVote.Domain.Entities
         public Store Store { get; set; }
         public DateTime date { get; set; }
         public decimal Price { get; set; }
-        public int UserId { get; set; }
+        public int User { get; set; }
     }
 }
