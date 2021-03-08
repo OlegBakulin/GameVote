@@ -13,6 +13,7 @@ namespace GameVote.Domain.ViewModels
 
         public int DiscountedPrice { get; set; }
 
+        public List<DistributionOfVotesByPrice> DistributionOfVotesByPrice { get; set; }
 
         public HttpStatusCode Delete(int id) 
         {
