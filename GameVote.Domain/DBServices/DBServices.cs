@@ -334,5 +334,62 @@ namespace GameVote.Domain.DBServices
                 };
             }
         }
+
+        public bool InsertVote(Vote vote)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(connectionString))
+                {
+                    string query = @"
+                                    INSERT INTO public.vote(
+                                    ""gameId"", ""storeId"", price, ""userId"")
+                                    VALUES(@gameid, @storeid, @price, @userid); ";
+
+                    connection.Open();
+
+                    var result = connection.Query<Vote>(query,
+                        new
+                        {
+                            gameid = vote.Game.Id,
+                            storeid = vote.Store.Id,
+                            price = vote.Price,
+                            userid = vote.User.Id
+                        });
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public bool DeleteVote(Vote vote)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(connectionString))
+                {
+                    string query = @"
+                                    DELETE FROM public.vote
+	                                    WHERE ""gameId"" = @gameid and ""storeId"" = @storeid and ""userId"" = @userid ;";
+
+                    connection.Open();
+
+                    var result = connection.Query<Vote>(query,
+                        new
+                        {
+                            gameid = vote.Game.Id,
+                            storeid = vote.Store.Id,
+                            userid = vote.User.Id
+                        });
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
