@@ -6,7 +6,6 @@ using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GameVote.Services.DBServices.Interface;
 
 
 namespace GameVote.Domain.DBServices
