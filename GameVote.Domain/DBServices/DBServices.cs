@@ -1,14 +1,14 @@
 ﻿using Dapper;
+using GameVote.Domain.DBServices.Interface;
 using GameVote.Domain.Entities;
 using GameVote.Domain.ViewModels;
-using GameVote.Services.DBServices.Interface;
 using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GameVote.Services.DBServices
+namespace GameVote.Domain.DBServices
 {
     public class DBServices : IDBServices
     {
