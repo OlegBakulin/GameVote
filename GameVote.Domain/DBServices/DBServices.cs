@@ -140,7 +140,7 @@ namespace GameVote.Domain.DBServices
                     {
                         Id = 1,
                         Description = "GameDes1",
-                        discountedPrice = 500,
+                        DiscountedPrice = 500,
                         Developer = new Developer
                         {
                             Id = 1, //3
@@ -189,7 +189,7 @@ namespace GameVote.Domain.DBServices
                     {
                         Id = 2,
                         Description = "GameDes2",
-                        discountedPrice = 700,
+                        DiscountedPrice = 700,
                         Developer = new Developer
                         {
                             Id = 2,
@@ -238,7 +238,7 @@ namespace GameVote.Domain.DBServices
                     {
                         Id = 3,
                         Description = "GameDes3",
-                        discountedPrice = 1500,
+                        DiscountedPrice = 1500,
                         Developer = new Developer
                         {
                             Id = 3,
@@ -287,7 +287,7 @@ namespace GameVote.Domain.DBServices
                     {
                         Id = 4,
                         Description = "GameDes4",
-                        discountedPrice = 400,
+                        DiscountedPrice = 400,
                         Developer = new Developer
                         {
                             Id = 1,
