@@ -24,7 +24,7 @@ namespace GameVote.Services.InMemory
 
         public InMemorySliceGameServices(IDBServices dBServices)
         {
-            _gamesForTitlePages = dBServices.GetGamesForTitlePage();
+            _gamesForTitlePages = dBServices.GetGamesForTitlePage(gameId: 0, storeId: 1);
         }
 
         public IEnumerable<GamesForTitlePage> Get()

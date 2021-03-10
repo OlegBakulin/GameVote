@@ -74,14 +74,25 @@ namespace GameVote.Controllers
         */
         public IActionResult Index()
         {
-            var games = _iDBServices.GetGamesForTitlePage();
+            var gamesall = _iDBServices.GetGamesForTitlePage(gameId: 0, storeId: 1);
+            List<GamesForTitlePage> games = new List<GamesForTitlePage>();
+            games.Add(gamesall.Find(i => i.Id == 1));
+            foreach (var gama in gamesall)
+            {
+                if (!games.Exists(x => x.Id == gama.Id) && gama.Store.Id == 1) 
+                {                    
+                        games.Add(gama);
+                }
+                 
+            }
+            games.OrderBy(o => o.Id);
             return View(games);
         }
 
         //[Route("{id}")]
         public IActionResult GamesById(int id)
         {
-            var game = _iDBServices.GetGamesForTitlePage().FirstOrDefault(i => i.Id == id );
+            var game = _iDBServices.GetGamesForTitlePage(gameId: id, storeId: 1);//.FirstOrDefault(i => i.Id == id );
             /*
             var gameplatformnow = new GamePlatformViewModel
             {

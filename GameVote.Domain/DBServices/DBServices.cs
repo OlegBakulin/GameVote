@@ -13,7 +13,7 @@ namespace GameVote.Domain.DBServices
     public class DBServices : IDBServices
     {
         private string connectionString = "Server = 127.0.0.1; Port=5432;Database=Vote;User Id = postgres; Password=123;";
-        public List<GamesForTitlePage> GetGamesForTitlePage(int gameId = 0, int storeId = 0)
+        public List<GamesForTitlePage> GetGamesForTitlePage(int gameId = 0, int storeId = 1)
         {
             try
             {
@@ -364,6 +364,8 @@ namespace GameVote.Domain.DBServices
                 return false;
             }
         }
+
+
         public bool DeleteVote(Vote vote)
         {
             try
@@ -392,4 +394,4 @@ namespace GameVote.Domain.DBServices
             }
         }
     }
-}
+} 
