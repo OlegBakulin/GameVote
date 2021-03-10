@@ -33,6 +33,11 @@ namespace GameVote
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Index");
+                app.UseHsts();
+            }
             app.UseStaticFiles();
             app.UseRouting();
 
