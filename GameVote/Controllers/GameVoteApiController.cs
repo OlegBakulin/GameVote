@@ -8,10 +8,11 @@ using GameVote.Domain.Entities.Interfaces;
 using System.Net;
 using GameVote.Services.InMemory;
 using System.Collections;
+using GameVote.Services.DTO;
 
 namespace GameVote.Controllers
 {
-    [Route("Game")]
+    //[Route("Game")]
     [ApiController]
     public class GameVoteApiController : ControllerBase, ISliceGameServices
     {
@@ -22,12 +23,20 @@ namespace GameVote.Controllers
         private readonly List<GamesForTitlePage> _gamesForTitlePage;
         private readonly InMemorySliceGameServices memorySliceGameServices;
         
-        [Route("All")]
+        //[Route("Index")]
         [HttpGet]
         public IEnumerable<GamesForTitlePage> Get()//IActionResult Index()
         {
             var sliceGames = _sliceGameServices.Get();
-
+/*
+            IEnumerable<(GamesForTitlePage gamesForTitle, int voteFullPrice)> gamafortitlevote;
+            foreach (var game in sliceGames)
+                {
+                gamafortitlevote = (game, (_sliceGameServices.Get(game.Id));
+                    
+                }
+            */
+            
             //enumerable.GetEnumerator(_gamesForTitlePage);
             //files(sliceGames);
 
@@ -36,7 +45,7 @@ namespace GameVote.Controllers
         }
 
         // GET api/<GameVoteWebApiController>/5
-        [Route("{id}")]
+        //[Route("{id}")]
         [HttpGet("{id}")]
         public GamesForTitlePage Get(int id)//IActionResult Get(int id)
         {
@@ -62,7 +71,7 @@ namespace GameVote.Controllers
         }
 
         // DELETE api/<GameVoteWebApiController>/5
-        [Route("{id}")]
+        //[Route("{id}")]
         [HttpDelete]
         public bool Delete(int id)
         {
