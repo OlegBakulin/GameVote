@@ -22,7 +22,7 @@ namespace GameVote
                 var services = scope.ServiceProvider;
                 try
                 {
-                    WebStoreContext context = services.GetRequiredService<WebStoreContext>();
+                    //WebStoreContext context = services.GetRequiredService<WebStoreContext>();
                     //DbInitializer.Initialize(context);
                     //DbInitializer.InitializeUsers(services);
                 }
