@@ -125,7 +125,14 @@ namespace GameVote.Domain.DBServices
                     {
                         x.DistributionOfVotesByPrice = votes.Where(v => v.GameId == x.Id & v.StoreId == x.Store.Id).ToList();
                     });
-
+                    foreach (var fullvote in gamesForTitlePage)     // Будет записывать количество проголосовавших за полную стоимость в 
+                    {                                               // gamesForTitlePage[id].DistributionOfVotesByPrice[0].CountVotesFullPrice
+                        if (fullvote.DistributionOfVotesByPrice.Count != 0)
+                        {
+                            fullvote.DistributionOfVotesByPrice.ElementAt(0).CountVotesFullPrice = fullvote.DistributionOfVotesByPrice.Count(p => p.Price >= fullvote.Price); 
+                        }
+                    }
+                    
                     return gamesForTitlePage;
                 }
             }
