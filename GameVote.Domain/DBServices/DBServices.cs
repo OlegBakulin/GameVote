@@ -75,11 +75,13 @@ namespace GameVote.Domain.DBServices
                                       public.game.id as ""GameId"",
                                       public.store.id as ""StoreId"",
                                       public.vote.price as ""Price"",
+                                      public.user.id as ""UserId"",
                                       Count(public.vote.price) AS ""CountVotes""
                                     FROM
                                       public.vote
                                       INNER JOIN public.game ON (public.vote.""gameId"" = public.game.id)
                                       INNER JOIN public.store ON(public.vote.""storeId"" = public.store.id)
+                                      INNER JOIN public.user ON(public.vote.""UserId"" = public.user.id)
                                     WHERE
                                       @gameId = 0 OR
                                       (public.""game"".""id"" = @gameId AND
@@ -87,7 +89,8 @@ namespace GameVote.Domain.DBServices
                                     GROUP BY
                                       public.vote.price,
                                       public.game.id,
-                                      public.store.id";
+                                      public.store.id,
+                                      public.user.id";
 
                     connection.Open();
 

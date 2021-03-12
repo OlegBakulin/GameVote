@@ -1,0 +1,72 @@
+﻿Первая загрузка сайта
+Путь URL	("/")
+Controller	Base
+Action		Index
+Возвращает	View(List<GamesForTitlePage>)
+Открывает	Views/Base/Index
+/////
+АПИ Данные для главной страницы
+Путь URL	("Game/All")
+Принимает	()
+Controller	GameVoteApi
+Action		[HttpGet] Get()
+Возвращает	IEnumerale<GamesForTitlePage>
+/////
+АПИ Данные для страницы игры
+Путь URL	("Game/{id}")
+Принимает	int ({id}) номер игры
+Controller	GameVoteApi
+Action		[HttpGet("{id}")] Get(int id)
+Возвращает	GamesForTitlePage
+/////
+АПИ Данные о всех голосах всех юзеров по всем играм
+Путь URL	("Vote")
+Принимает	()
+Controller	VotesApi
+Action		[HttpGet] VotesGet()
+Возвращает	IEnumerable<IEnumerable<decimal>>	список игр; 
+												в каждой игре список цен голосов 
+/////
+АПИ Данные для страницы игры о голосе юзера
+Путь URL	("Vote/{id}")
+Принимает	int ({id}) номер игры
+Controller	VotesApi
+Action		[HttpGet("{id}")] VoteGet(int id)
+Возвращает	decimal голос ценой юзера 
+/////
+АПИ Данные для страницы игры о диаграмме голосов
+Путь URL	("Vote/diagramm/{id}")
+Принимает	int ({id}) номер игры
+Controller	VotesApi
+Action		[HttpGet("diagramm/{id}")] VoteDiagrammGet(int id)
+Возвращает	int[] голоса всех юзереров за данную игру где
+				[0] - 0 - 999, [1] - 1000 - 1999, [2] - 2000 - 2999 и т.д.,
+				[n] - последний элемент будет показывать только за полную стоимость
+/////
+АПИ Пост для добавления голоса
+Путь URL	("VoteEdit/Insert")
+Принимает	[FromBody] Vote vote Данные об голосе основанные на классе
+								GameVote.Domain.Entities.Vote полученные
+								со страницы из <form></form>
+Controller	EditVoteApi
+Action		[HttpPost("Insert")] VoteInsert([FromBody] Vote vote)
+Возвращает	
+/////
+АПИ Пут для изменения голоса через удаление старого и создание нового
+Путь URL	("VoteEdit/Redact")
+Принимает	[FromBody] Vote vote Данные об голосе основанные на классе
+								GameVote.Domain.Entities.Vote полученные
+								со страницы из <form></form>
+Controller	EditVoteApi
+Action		[HttpPut("Redact")] VoteDeleteInsert([FromBody] Vote vote)
+Возвращает	
+/////
+АПИ Делит для удаления голоса
+Путь URL	("VoteEdit/Delete")
+Принимает	[FromBody] Vote vote Данные об голосе основанные на классе
+								GameVote.Domain.Entities.Vote полученные
+								со страницы из <form></form>
+Controller	EditVoteApi
+Action		[HttpDelete("Delete")] VoteDelete([FromBody] Vote vote)
+Возвращает	
+/////
