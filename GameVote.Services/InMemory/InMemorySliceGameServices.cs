@@ -29,7 +29,18 @@ namespace GameVote.Services.InMemory
 
         public IEnumerable<GamesForTitlePage> Get()
         {
-            return _gamesForTitlePages;
+            List<GamesForTitlePage> games = new List<GamesForTitlePage>();
+            games.Add(_gamesForTitlePages.Find(i => i.Id == 1));
+            foreach (var gama in _gamesForTitlePages)
+            {
+                if (!games.Exists(x => x.Id == gama.Id) && gama.Store.Id == 1)
+                {
+                    games.Add(gama);
+                }
+
+            }
+            games.OrderBy(o => o.Id);
+            return games;
         }
 
         public GamesForTitlePage Get(int id)
