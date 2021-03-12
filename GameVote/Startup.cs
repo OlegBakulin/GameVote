@@ -42,63 +42,60 @@ namespace GameVote
             }
             app.UseStaticFiles();
             app.UseRouting();
-
-            //app.UseAuthentication();
-            //app.UseAuthorization();
             
-            /*
-            app.Use(async (context, next) =>
-            {
-            // получаем конечную точку
-            Endpoint endpoint = context.GetEndpoint();
+                //app.UseAuthentication();
+                //app.UseAuthorization();
 
-            if (endpoint != null)
-            {
-                // получаем шаблон маршрута, который ассоциирован с конечной точкой
-                var routePattern = (endpoint as Microsoft.AspNetCore.Routing.RouteEndpoint)?.RoutePattern?.RawText;
-
-                    Debug.WriteLine($"Endpoint Name: {endpoint.DisplayName}");
-                    Debug.WriteLine($"Route Pattern: {routePattern}");
-
-                    // если конечная точка определена, передаем обработку дальше
-                    await next();
-                }
-                else
+                /*
+                app.Use(async (context, next) =>
                 {
-                    Debug.WriteLine("Endpoint: null");
-                    // если конечная точка не определена, завершаем обработку
-                    await context.Response.WriteAsync("Endpoint is not defined");
-                }
-            });
-            */
+                // получаем конечную точку
+                Endpoint endpoint = context.GetEndpoint();
 
-            /*
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/index", async context =>
+                if (endpoint != null)
                 {
-                    await context.Response.WriteAsync("Hello Index!");
+                    // получаем шаблон маршрута, который ассоциирован с конечной точкой
+                    var routePattern = (endpoint as Microsoft.AspNetCore.Routing.RouteEndpoint)?.RoutePattern?.RawText;
+
+                        Debug.WriteLine($"Endpoint Name: {endpoint.DisplayName}");
+                        Debug.WriteLine($"Route Pattern: {routePattern}");
+
+                        // если конечная точка определена, передаем обработку дальше
+                        await next();
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Endpoint: null");
+                        // если конечная точка не определена, завершаем обработку
+                        await context.Response.WriteAsync("Endpoint is not defined");
+                    }
                 });
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });
-*/
+                */
 
-            app.UseEndpoints(endpoints =>
+                /*
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapGet("/index", async context =>
+                    {
+                        await context.Response.WriteAsync("Hello Index!");
+                    });
+                    endpoints.MapGet("/", async context =>
+                    {
+                        await context.Response.WriteAsync("Hello World!");
+                    });
+                });
+    */
+
+                app.UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Base}/{action=Index}/{id?}");
-                                       
-                    /*
-                                            endpoints.MapControllerRoute(
-                                            name: "defaultApi",
-                                            pattern: "api/{controller}/{id?}");
-                    */
+                        name: "default",
+                        pattern: "{controller=Base}/{action=Index}/{id?}");
+                    endpoints.MapControllerRoute(
+                        name: "defaultApi",
+                        pattern: "api/{controller}/{id?}");
+
                 });
-            
             
                        /* app.Run(async (context) =>
                         {
