@@ -9,7 +9,8 @@ namespace GameVote.Domain.DBServices.Interface
 {
     public interface IDBServices
     {
-        public List<GamesForTitlePage> GetGamesForTitlePage();
-
+        public List<GamesForTitlePage> GetGamesForTitlePage(int gameId, int storeId);
+        public bool InsertVote(Vote vote);
+        public bool DeleteVote(Vote vote);
     }
 }

@@ -6,82 +6,137 @@ using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace GameVote.Domain.DBServices
 {
     public class DBServices : IDBServices
     {
         private string connectionString = "Server = 127.0.0.1; Port=5432;Database=Vote;User Id = postgres; Password=123;";
-        public List<GamesForTitlePage> GetGamesForTitlePage()
+        public List<GamesForTitlePage> GetGamesForTitlePage(int gameId = 0, int storeId = 1)
         {
             try
             {
                 using (var connection = new NpgsqlConnection(connectionString))
                 {
-
                     string query = @"
-SELECT game.id,
-platform.""name"",
-game.name, 
-release, 
-game.description, 
-localization, 
-                    
-""minAge"", 
-""modeGame"", 
-""seriesGame"", 
-subtitle, 
-""typeGame"", 
-""urlOfficialSaitGame"", 
-""imgGame"",
-                    
-platform.id, 
-platform.""name"", 
-platform.description,
-                    
-genre.id, 
-genre.""name"", 
-genre.description,
-                    
-developer.id, 
-developer.""name"", 
-developer.description,
-                    
-publisher.id, 
-publisher.""name"", 
-publisher.description
-                    
-FROM public.game as game
-                    
-LEFT join platform on game.""platformId"" = platform.id
-                    
-LEFT join genre on game.""genreId"" = genre.id
-                    
-LEFT join developer on game.""developerId"" = developer.id
-                    
-LEFT join publisher on game.""publisherId"" = publisher.id;";
+                                    SELECT
+                                      public.""gamesInStore"".id,
+                                      public.""gamesInStore"".""gameId"",
+                                      public.""gamesInStore"".""storeId"",
+                                      public.""gamesInStore"".price,
+                                      public.""gamesInStore"".discount,
+                                      public.""gamesInStore"".""discountedPrice"",
+                                      public.game.id,
+                                      public.game.""platformId"",
+                                      public.game.name,
+                                      public.game.""genreId"",
+                                      public.game.release,
+                                      public.game.""developerId"",
+                                      public.game.""publisherId"",
+                                      public.game.description,
+                                      public.game.""statusId"",
+                                      public.game.localization,
+                                      public.game.""minAge"",
+                                      public.game.""modeGame"",
+                                      public.game.""seriesGame"",
+                                      public.game.subtitle,
+                                      public.game.""typeGame"",
+                                      public.game.""urlOfficialSaitGame"",
+                                      public.game.""imgGame"",
+                                      public.platform.id,
+                                      public.platform.name,
+                                      public.platform.description,
+                                      public.genre.id,
+                                      public.genre.name,
+                                      public.genre.description,
+                                      public.publisher.id,
+                                      public.publisher.name,
+                                      public.publisher.description,
+                                      public.developer.id,
+                                      public.developer.name,
+                                      public.developer.description,
+                                      public.store.id,
+                                      public.store.name,
+                                      public.store.description
+                                    FROM
+                                      public.""gamesInStore""
+                                      INNER JOIN public.game ON(public.""gamesInStore"".""gameId"" = public.game.id)
+                                      INNER JOIN public.platform ON(public.game.""platformId"" = public.platform.id)
+                                      INNER JOIN public.genre ON(public.game.""genreId"" = public.genre.id)
+                                      INNER JOIN public.publisher ON(public.game.""publisherId"" = public.publisher.id)
+                                      INNER JOIN public.developer ON(public.game.""developerId"" = public.developer.id)
+                                      INNER JOIN public.store ON(public.""gamesInStore"".""storeId"" = public.store.id)
+                                    WHERE
+                                      @gameId = 0 OR
+                                      (public.""gamesInStore"".""gameId"" = @gameId AND
+                                        public.""gamesInStore"".""storeId"" = @storeId);
+                                    SELECT 
+                                      public.game.id as ""GameId"",
+                                      public.store.id as ""StoreId"",
+                                      public.vote.price as ""Price"",
+                                      public.user.id as ""UserId"",
+                                      Count(public.vote.price) AS ""CountVotes""
+                                    FROM
+                                      public.vote
+                                      INNER JOIN public.game ON (public.vote.""gameId"" = public.game.id)
+                                      INNER JOIN public.store ON(public.vote.""storeId"" = public.store.id)
+                                      INNER JOIN public.user ON(public.vote.""UserId"" = public.user.id)
+                                    WHERE
+                                      @gameId = 0 OR
+                                      (public.""game"".""id"" = @gameId AND
+                                        public.""store"".""id"" = @storeId)
+                                    GROUP BY
+                                      public.vote.price,
+                                      public.game.id,
+                                      public.store.id,
+                                      public.user.id";
 
                     connection.Open();
 
-                    var result = connection.Query
-                        <GamesForTitlePage,
+                    List<GamesForTitlePage> gamesForTitlePage;
+                    List<DistributionOfVotesByPrice> votes;
+                    using (var result = connection.QueryMultiple(query, new
+                    { gameid = gameId, storeid = storeId }))
+                    {
+                        gamesForTitlePage = result.Read<GamesInStore,
+                        GamesForTitlePage,
                         Platform,
                         Genre,
-                        Developer,
                         Publisher,
-                        GamesForTitlePage>(query,
-                        (game, platform, genre, developer, publisher) =>
+                        Developer,
+                        Store,
+                    GamesForTitlePage>(
+                        (gameInStore, gameForTitlePage, platform, genre, publisher, developer, store) =>
                         {
-                            game.Platform = platform;
-                            game.Genre = genre;
-                            game.Developer = developer;
-                            game.Publisher = publisher;
-                            return game;
+                            gameForTitlePage.Platform = platform;
+                            gameForTitlePage.Genre = genre;
+                            gameForTitlePage.Publisher = publisher;
+                            gameForTitlePage.Developer = developer;
+                            gameForTitlePage.Store = store;
+                            gameForTitlePage.Discount = gameInStore.Discount;
+                            gameForTitlePage.Price = gameInStore.Price;
+                            gameForTitlePage.DiscountedPrice = gameInStore.DiscountedPrice;
+
+                            return gameForTitlePage;
                         }
-                        ).OrderBy(i => i.Id) 
-                        .ToList();
-                    return result;
+                            )
+                            .ToList();
+                        votes = result.Read<DistributionOfVotesByPrice>().ToList();
+                    }
+                    gamesForTitlePage.ForEach(x =>
+                    {
+                        x.DistributionOfVotesByPrice = votes.Where(v => v.GameId == x.Id & v.StoreId == x.Store.Id).ToList();
+                    });
+                    foreach (var fullvote in gamesForTitlePage)     // Будет записывать количество проголосовавших за полную стоимость в 
+                    {                                               // gamesForTitlePage[id].DistributionOfVotesByPrice[0].CountVotesFullPrice
+                        if (fullvote.DistributionOfVotesByPrice.Count != 0)
+                        {
+                            fullvote.DistributionOfVotesByPrice.ElementAt(0).CountVotesFullPrice = fullvote.DistributionOfVotesByPrice.Count(p => p.Price >= fullvote.Price); 
+                        }
+                    }
+                    
+                    return gamesForTitlePage;
                 }
             }
             catch (Exception ex)
@@ -95,7 +150,7 @@ LEFT join publisher on game.""publisherId"" = publisher.id;";
                     {
                         Id = 1,
                         Description = "GameDes1",
-                        discountedPrice = 500,
+                        DiscountedPrice = 500,
                         Developer = new Developer
                         {
                             Id = 1, //3
@@ -144,7 +199,7 @@ LEFT join publisher on game.""publisherId"" = publisher.id;";
                     {
                         Id = 2,
                         Description = "GameDes2",
-                        discountedPrice = 700,
+                        DiscountedPrice = 700,
                         Developer = new Developer
                         {
                             Id = 2,
@@ -193,7 +248,7 @@ LEFT join publisher on game.""publisherId"" = publisher.id;";
                     {
                         Id = 3,
                         Description = "GameDes3",
-                        discountedPrice = 1500,
+                        DiscountedPrice = 1500,
                         Developer = new Developer
                         {
                             Id = 3,
@@ -242,7 +297,7 @@ LEFT join publisher on game.""publisherId"" = publisher.id;";
                     {
                         Id = 4,
                         Description = "GameDes4",
-                        discountedPrice = 400,
+                        DiscountedPrice = 400,
                         Developer = new Developer
                         {
                             Id = 1,
@@ -289,5 +344,64 @@ LEFT join publisher on game.""publisherId"" = publisher.id;";
                 };
             }
         }
+
+        public bool InsertVote(Vote vote)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(connectionString))
+                {
+                    string query = @"
+                                    INSERT INTO public.vote(
+                                    ""gameId"", ""storeId"", price, ""userId"")
+                                    VALUES(@gameid, @storeid, @price, @userid); ";
+
+                    connection.Open();
+
+                    var result = connection.Query<Vote>(query,
+                        new
+                        {
+                            gameid = vote.Game.Id,
+                            storeid = vote.Store.Id,
+                            price = vote.Price,
+                            userid = vote.User.Id
+                        });
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+
+        public bool DeleteVote(Vote vote)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(connectionString))
+                {
+                    string query = @"
+                                    DELETE FROM public.vote
+	                                    WHERE ""gameId"" = @gameid and ""storeId"" = @storeid and ""userId"" = @userid ;";
+
+                    connection.Open();
+
+                    var result = connection.Query<Vote>(query,
+                        new
+                        {
+                            gameid = vote.Game.Id,
+                            storeid = vote.Store.Id,
+                            userid = vote.User.Id
+                        });
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
-}
+} 

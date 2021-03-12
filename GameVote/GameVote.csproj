@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameVote.Clients\GameVote.Clients.csproj" />
+    <ProjectReference Include="..\GameVote.DAL\GameVote.DAL.csproj" />
     <ProjectReference Include="..\GameVote.Domain\GameVote.Domain.csproj" />
     <ProjectReference Include="..\GameVote.Interfaces\GameVote.Interfaces.csproj" />
     <ProjectReference Include="..\GameVote.Services\GameVote.Services.csproj" />

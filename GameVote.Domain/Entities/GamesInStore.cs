@@ -12,6 +12,6 @@ namespace GameVote.Domain.Entities
         public decimal Price { get; set; }
         public int Discount { get; set; }
 
-        public decimal discountedPrice { get; set; }
+        public int DiscountedPrice { get; set; }
     }
 }

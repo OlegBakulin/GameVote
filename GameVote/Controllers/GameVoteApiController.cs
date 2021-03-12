@@ -8,6 +8,7 @@ using GameVote.Domain.Entities.Interfaces;
 using System.Net;
 using GameVote.Services.InMemory;
 using System.Collections;
+using GameVote.Services.DTO;
 
 namespace GameVote.Controllers
 {
@@ -27,7 +28,15 @@ namespace GameVote.Controllers
         public IEnumerable<GamesForTitlePage> Get()//IActionResult Index()
         {
             var sliceGames = _sliceGameServices.Get();
-
+/*
+            IEnumerable<(GamesForTitlePage gamesForTitle, int voteFullPrice)> gamafortitlevote;
+            foreach (var game in sliceGames)
+                {
+                gamafortitlevote = (game, (_sliceGameServices.Get(game.Id));
+                    
+                }
+            */
+            
             //enumerable.GetEnumerator(_gamesForTitlePage);
             //files(sliceGames);
 
@@ -62,7 +71,7 @@ namespace GameVote.Controllers
         }
 
         // DELETE api/<GameVoteWebApiController>/5
-        [Route("{id}")]
+        //[Route("{id}")]
         [HttpDelete]
         public bool Delete(int id)
         {
