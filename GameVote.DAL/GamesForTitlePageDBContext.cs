@@ -1,8 +1,6 @@
 ﻿using GameVote.Domain.ViewModels;
 using GameVote.Domain.Entities;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace GameVote.DAL
 {

@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebStoreCoreApplicatioc.DAL;
+using GameVote.DAL;
 
 namespace GameVote
 {
@@ -20,17 +20,6 @@ namespace GameVote
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                try
-                {
-                    //WebStoreContext context = services.GetRequiredService<WebStoreContext>();
-                    //DbInitializer.Initialize(context);
-                    //DbInitializer.InitializeUsers(services);
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "ERROR!!! FOR DB INITIALIZING!!!");
-                }
             }
 
             host.Run();

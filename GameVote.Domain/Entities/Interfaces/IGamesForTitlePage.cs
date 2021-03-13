@@ -1,7 +1,4 @@
-﻿using GameVote.Domain.Entities;
-using GameVote.Domain.Entities.Interfaces;
-
-namespace GameVote.Domain.Entities.Interfaces
+﻿namespace GameVote.Domain.Entities.Interfaces
 {
     public interface IGamesForTitlePage
     {

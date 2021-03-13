@@ -12,9 +12,8 @@ namespace GameVote.Services.DTO
         public DTOGameForTitlePage Get(int id)
         {
 
-            var games = _iDBServices.GetGamesForTitlePage(gameId: id, storeId: 1);//.Where(i => i.Id == id);
+            var games = _iDBServices.GetGamesForTitlePage(gameId: id, storeId: 1);
             var game = games.FindLast(i => i.Id == id);
-            //var userQuantityVote = _iDBServices.GetVoteForTitlePage();
             return new DTOGameForTitlePage
             {
                 Id = game.Id,
@@ -23,7 +22,7 @@ namespace GameVote.Services.DTO
                 ImgGame = game.ImgGame,
                 Price = game.Price,
                 DiscountedPrice = game.DiscountedPrice,
-                UserVoteQuantity = games.Count(i => i.ModeGame != null),  // userQuantityVote.Count(i=>i.ModeGame!= null),
+                UserVoteQuantity = games.Count(i => i.ModeGame != null),
                 UserVoteFullPrice = games.Count(i => i.ModeGame != null)
             };
         }

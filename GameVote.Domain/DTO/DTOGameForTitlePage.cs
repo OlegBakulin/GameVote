@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GameVote.Domain.DBServices.Interface;
-using GameVote.Domain.DTO.IDTO;
-using GameVote.Domain.Entities;
+﻿using GameVote.Domain.DTO.IDTO;
 
 namespace GameVote.Domain.DTO
 {
