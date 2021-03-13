@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameVote.Domain.Entities
+﻿namespace GameVote.Domain.Entities
 {
     public class Genre
     {

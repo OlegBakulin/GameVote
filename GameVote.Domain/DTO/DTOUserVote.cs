@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using GameVote.Domain.DTO.IDTO;
 using GameVote.Domain.Entities;
 

@@ -2,9 +2,6 @@
 using GameVote.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Net;
-using GameVote.Domain;
-using GameVote.Domain.Entities.Interfaces;
 using GameVote.Domain.Entities;
 using GameVote.Domain.DBServices.Interface;
 using System.Linq;

@@ -1,7 +1,5 @@
 ﻿using GameVote.Domain.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GameVote.Domain.DTO.IDTO
 {
@@ -9,11 +7,7 @@ namespace GameVote.Domain.DTO.IDTO
     {
         public int Id { get; set; }
 
-        #region Game
         public Game Game { get; set; }
-
-        public int GameId { get; set; }
-        #endregion
 
         public Store Store { get; set; }
         public DateTime date { get; set; }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameVote.Domain.DTO.IDTO
+﻿namespace GameVote.Domain.DTO.IDTO
 {
     public interface IDTOGameForTitlePage
     {

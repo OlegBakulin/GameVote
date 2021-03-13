@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using GameVote.Domain.Entities;
 
-namespace WebStoreCoreApplicatioc.DAL
+namespace GameVote.DAL
 {
     public class WebStoreContext : IdentityDbContext<User>
     {

@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.Net.Http.Headers;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GameVote.Clients.Base
@@ -60,7 +58,6 @@ namespace GameVote.Clients.Base
         protected virtual void Dispose(bool disposing)
         {
             if (!disposing) return;
-            //_Client.Dispose();
         }
     }
 }
