@@ -25,6 +25,7 @@ namespace GameVote
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddCors();
             services.AddSingleton<IDBServices, DBServices>();
             services.AddSingleton<ISliceGameServices, InMemorySliceGameServices>();
         }
@@ -42,7 +43,7 @@ namespace GameVote
             }
             app.UseStaticFiles();
             app.UseRouting();
-            
+            app.UseCors(builder => builder.AllowAnyOrigin());
                 //app.UseAuthentication();
                 //app.UseAuthorization();
 
