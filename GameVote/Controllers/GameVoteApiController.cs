@@ -13,8 +13,7 @@ namespace GameVote.Controllers
     {
         private readonly ISliceGameServices _sliceGameServices;
         public GameVoteApiController(ISliceGameServices gamesForTitlePage) => _sliceGameServices = gamesForTitlePage;
-        
-        [Route("All")]
+       
         [HttpGet]
         public IEnumerable<GamesForTitlePage> Get()
         {
@@ -22,7 +21,6 @@ namespace GameVote.Controllers
             return sliceGames;
         }
 
-        [Route("{id}")]
         [HttpGet("{id}")]
         public GamesForTitlePage Get(int id)
         {
