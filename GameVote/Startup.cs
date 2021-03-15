@@ -25,6 +25,7 @@ namespace GameVote
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddCors();
             services.AddSingleton<IDBServices, DBServices>();
             services.AddSingleton<ISliceGameServices, InMemorySliceGameServices>();
         }
@@ -42,51 +43,51 @@ namespace GameVote
             }
             app.UseStaticFiles();
             app.UseRouting();
-            
-                //app.UseAuthentication();
-                //app.UseAuthorization();
+            app.UseCors(builder => builder.AllowAnyOrigin());
+            //app.UseAuthentication();
+            //app.UseAuthorization();
 
-                /*
-                app.Use(async (context, next) =>
+            /*
+            app.Use(async (context, next) =>
+            {
+            // получаем конечную точку
+            Endpoint endpoint = context.GetEndpoint();
+
+            if (endpoint != null)
+            {
+                // получаем шаблон маршрута, который ассоциирован с конечной точкой
+                var routePattern = (endpoint as Microsoft.AspNetCore.Routing.RouteEndpoint)?.RoutePattern?.RawText;
+
+                    Debug.WriteLine($"Endpoint Name: {endpoint.DisplayName}");
+                    Debug.WriteLine($"Route Pattern: {routePattern}");
+
+                    // если конечная точка определена, передаем обработку дальше
+                    await next();
+                }
+                else
                 {
-                // получаем конечную точку
-                Endpoint endpoint = context.GetEndpoint();
+                    Debug.WriteLine("Endpoint: null");
+                    // если конечная точка не определена, завершаем обработку
+                    await context.Response.WriteAsync("Endpoint is not defined");
+                }
+            });
+            */
 
-                if (endpoint != null)
+            /*
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/index", async context =>
                 {
-                    // получаем шаблон маршрута, который ассоциирован с конечной точкой
-                    var routePattern = (endpoint as Microsoft.AspNetCore.Routing.RouteEndpoint)?.RoutePattern?.RawText;
-
-                        Debug.WriteLine($"Endpoint Name: {endpoint.DisplayName}");
-                        Debug.WriteLine($"Route Pattern: {routePattern}");
-
-                        // если конечная точка определена, передаем обработку дальше
-                        await next();
-                    }
-                    else
-                    {
-                        Debug.WriteLine("Endpoint: null");
-                        // если конечная точка не определена, завершаем обработку
-                        await context.Response.WriteAsync("Endpoint is not defined");
-                    }
+                    await context.Response.WriteAsync("Hello Index!");
                 });
-                */
-
-                /*
-                app.UseEndpoints(endpoints =>
+                endpoints.MapGet("/", async context =>
                 {
-                    endpoints.MapGet("/index", async context =>
-                    {
-                        await context.Response.WriteAsync("Hello Index!");
-                    });
-                    endpoints.MapGet("/", async context =>
-                    {
-                        await context.Response.WriteAsync("Hello World!");
-                    });
+                    await context.Response.WriteAsync("Hello World!");
                 });
-    */
+            });
+*/
 
-                app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllerRoute(
                         name: "default",
