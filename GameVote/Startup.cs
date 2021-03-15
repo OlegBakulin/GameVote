@@ -2,21 +2,16 @@ using GameVote.Domain.DBServices;
 using GameVote.Domain.DBServices.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GameVote.Interfaces;
-using GameVote.Clients.SliceGame;
 using GameVote.Services.InMemory;
-using GameVote.Domain.Entities.Interfaces;
-using GameVote.Domain.ViewModels;
-using GameVote.Controllers;
-using System.Diagnostics;
+using GameVote.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using WebStoreCoreApplicatioc.DAL;
+using System;
+using Microsoft.AspNetCore.Http;
 
 namespace GameVote
 {
@@ -27,6 +22,39 @@ namespace GameVote
             services.AddMvc();
             services.AddSingleton<IDBServices, DBServices>();
             services.AddSingleton<ISliceGameServices, InMemorySliceGameServices>();
+
+            //////////
+            services.AddIdentity<User, IdentityRole>()
+                .AddUserStore<WebStoreContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 5;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+
+                options.User.RequireUniqueEmail = true;
+            });
+
+            services.ConfigureApplicationCookie(options => 
+            {
+                options.Cookie.HttpOnly = true;
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
+            //////////
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -42,66 +70,24 @@ namespace GameVote
             }
             app.UseStaticFiles();
             app.UseRouting();
+
+            //////////
             
-                //app.UseAuthentication();
-                //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-                /*
-                app.Use(async (context, next) =>
-                {
-                // получаем конечную точку
-                Endpoint endpoint = context.GetEndpoint();
 
-                if (endpoint != null)
-                {
-                    // получаем шаблон маршрута, который ассоциирован с конечной точкой
-                    var routePattern = (endpoint as Microsoft.AspNetCore.Routing.RouteEndpoint)?.RoutePattern?.RawText;
+            //////////
 
-                        Debug.WriteLine($"Endpoint Name: {endpoint.DisplayName}");
-                        Debug.WriteLine($"Route Pattern: {routePattern}");
-
-                        // если конечная точка определена, передаем обработку дальше
-                        await next();
-                    }
-                    else
-                    {
-                        Debug.WriteLine("Endpoint: null");
-                        // если конечная точка не определена, завершаем обработку
-                        await context.Response.WriteAsync("Endpoint is not defined");
-                    }
-                });
-                */
-
-                /*
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapGet("/index", async context =>
-                    {
-                        await context.Response.WriteAsync("Hello Index!");
-                    });
-                    endpoints.MapGet("/", async context =>
-                    {
-                        await context.Response.WriteAsync("Hello World!");
-                    });
-                });
-    */
-
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllerRoute(
-                        name: "default",
-                        pattern: "{controller=Base}/{action=Index}/{id?}");
-                    endpoints.MapControllerRoute(
-                        name: "defaultApi",
-                        pattern: "api/{controller}/{id?}");
-
-                });
-            
-                       /* app.Run(async (context) =>
-                        {
-                            await context.Response.WriteAsync();
-                        });*/
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Base}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "defaultApi",
+                    pattern: "api/{controller}/{id?}");
+            });
         }
-    
     }
 }

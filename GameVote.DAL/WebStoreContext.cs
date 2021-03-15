@@ -4,9 +4,9 @@ using GameVote.Domain.Entities;
 
 namespace WebStoreCoreApplicatioc.DAL
 {
-    public class WebStoreContext : IdentityDbContext<User>
+    public class WebStoreContext : User
     {
-        public WebStoreContext(DbContextOptions options) : base(options)
+        public WebStoreContext(DbContextOptions options) : base()
         {
 
         }
