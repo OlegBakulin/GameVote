@@ -11,7 +11,7 @@ using System.Collections;
 
 namespace GameVote.Controllers
 {
-    //[Route("Game")]
+    [Route("Game")]
     [ApiController]
     public class GameVoteApiController : ControllerBase, ISliceGameServices
     {
