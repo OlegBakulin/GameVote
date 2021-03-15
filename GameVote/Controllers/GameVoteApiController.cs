@@ -7,14 +7,13 @@ using GameVote.Services.InMemory;
 
 namespace GameVote.Controllers
 {
-    [Route("Game")]
+    //[Route("Game")]
     [ApiController]
     public class GameVoteApiController : ControllerBase, ISliceGameServices
     {
         private readonly ISliceGameServices _sliceGameServices;
         public GameVoteApiController(ISliceGameServices gamesForTitlePage) => _sliceGameServices = gamesForTitlePage;
         
-        [Route("All")]
         [HttpGet]
         public IEnumerable<GamesForTitlePage> Get()
         {
@@ -22,7 +21,6 @@ namespace GameVote.Controllers
             return sliceGames;
         }
 
-        [Route("{id}")]
         [HttpGet("{id}")]
         public GamesForTitlePage Get(int id)
         {
