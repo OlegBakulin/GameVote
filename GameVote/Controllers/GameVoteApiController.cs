@@ -7,7 +7,7 @@ using GameVote.Services.InMemory;
 
 namespace GameVote.Controllers
 {
-    //[Route("Game")]
+    [Route("Game")]
     [ApiController]
     public class GameVoteApiController : ControllerBase, ISliceGameServices
     {
