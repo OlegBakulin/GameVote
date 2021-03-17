@@ -22,12 +22,10 @@ namespace GameVote
             services.AddMvc();
             services.AddSingleton<IDBServices, DBServices>();
             services.AddSingleton<ISliceGameServices, InMemorySliceGameServices>();
+            services.AddScoped<IDBAUTH, DBAUTH>();
 
             //////////
-            services.AddIdentity<User, IdentityRole>()
-                .AddUserStore<WebStoreContext>()
-                .AddDefaultTokenProviders();
-
+            
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -47,9 +45,9 @@ namespace GameVote
             services.ConfigureApplicationCookie(options => 
             {
                 options.Cookie.HttpOnly = true;
-                options.LoginPath = "/Account/Login";
-                options.LogoutPath = "/Account/Logout";
-                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.LoginPath = "/Login/Login";
+                options.LogoutPath = "/Login/Logout";
+                options.AccessDeniedPath = "/Login/AccessDenied";
                 options.SlidingExpiration = true;
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

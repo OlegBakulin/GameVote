@@ -7,15 +7,15 @@
                 <div class="header">
                     <img class="logo" src="/Image/Logo.jpg" alt="">
                     <a href="oproekte">О проекте</a>
-                    <a asp-controller="GameVoteApi"
-                       asp-action="Get"
-                       asp-route-id="@Model.ElementAt(3)">
+                    
                                                     <!--asp-route-order="name:Base"
                                                    asp-route-returnUrl="@Context.Request.Path"
                                                    -->
                         Главная
                     </a>
-                    <button class="login" value="Войти" style="font-size: 100px 40px 100px 100px" />
+                    <button class="login" value="Войти" style="font-size: 100px 40px 100px 100px"
+                            asp-controller="Account"
+                            asp-action="Login"/>
                     <text></text>
                 </div>
                 <div class="games">

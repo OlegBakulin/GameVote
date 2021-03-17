@@ -6,7 +6,7 @@ namespace WebStoreCoreApplicatioc.DAL
 {
     public class WebStoreContext : User
     {
-        public WebStoreContext(DbContextOptions options) : base()
+        public WebStoreContext() : base() //DbContextOptions options) : base()
         {
 
         }
