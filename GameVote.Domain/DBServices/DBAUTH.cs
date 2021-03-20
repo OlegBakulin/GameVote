@@ -14,6 +14,7 @@ namespace GameVote.Domain.DBServices
         private string connectionString = "Server = 127.0.0.1; Port=5432;Database=Vote;User Id = postgres; Password=123;";
         public User UserReg(User user)
         {
+            bool userExists = false;
             try
             {
                 using (var connection = new NpgsqlConnection(connectionString))
@@ -21,63 +22,45 @@ namespace GameVote.Domain.DBServices
                     string query = @$"
                                     SELECT * 
                                     FROM public.""user""
-                                    WHERE
-                                    @Email = {user.Email};";
+                                    WHERE ""email"" = @email;";
 
                     connection.Open();
-                    List<User> users;
-                    using (
-                        var result = connection.QueryMultiple(query))
-                    {
-                        users = result.Read<User>().ToList();
-                        user = users.ElementAt(0);
-                        user.PasswordHash = null;
-                    }
+                    var result = connection.Query<User>(query, new { email = user.Email });
+                    userExists = result.ToList().Count != 0;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                user = null;
+                //здесь должно быть предупреждение об ошибке и её логирование, создавать нового пользователя не надо
+                //user = null;
             }
 
-            if (user == null)
+            if (!userExists)
             {
-                var newiduser = 1;
+                int id;
                 using (var connection = new NpgsqlConnection(connectionString))
                 {
-                    string query = @$"SELECT COUNT(*) FROM public.""user""";
-                                    
-                    connection.Open();
-                    
-                    using (
-                        var result = connection.QueryMultiple(query,
-                        new { }))
-                    {
-                        newiduser = newiduser + result.Read<int>().ToList().ElementAt(0);
-                    }
-                }
-                
-                using (var connection = new NpgsqlConnection(connectionString))
-                {
-                    string query = @$"
-                                    INSERT INTO public.""user"" SET 
-                                    Id={newiduser},
-                                    UserName={user.UserName}, 
-                                    Email={user.Email},
-                                    PhoneNumber={user.PhoneNumber},
-                                    Login={user.Login},
-                                    PasswordHash={user.PasswordHash},
-                                    Role='UserVote'";
+                    string query = @$"INSERT INTO public.""user""(name,email,phone,login,password)
+                            VALUES (@name, @email, @phone, @login, @password) RETURNING id;";
 
                     connection.Open();
-                    using (var result = connection.QueryMultiple(query));
+                    id = (Int32)connection.ExecuteScalar(query,
+                        new
+                        {
+                            name = user.UserName,
+                            email = user.Email,
+                            phone = user.PhoneNumber,
+                            login = user.Login,
+                            password = user.PasswordHash
+                        }
+                        );
                 }
-                user.Id = newiduser;
+                user.Id = id;
                 user.Role = "UserVote";
             }
             return user;
         }
-        
+
         public User UserLog(User user)
         {
             try
@@ -88,8 +71,8 @@ namespace GameVote.Domain.DBServices
                                     SELECT * 
                                     FROM public.""user""
                                     WHERE
-                                    @Email = {user.Email} AND
-                                    @PasswordHash = {user.PasswordHash};";
+                                    ""email"" = @Email AND
+                                    ""passwordHash"" = @PasswordHash;";
 
                     connection.Open();
                     List<User> users;
