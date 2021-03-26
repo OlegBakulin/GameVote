@@ -46,7 +46,7 @@ namespace GameVote.Controllers
         public decimal VoteGet(int id)
         {
             var voteuser = services.GetGamesForTitlePage(gameId: id, storeId: 1).FirstOrDefault(e => e.Id.Equals(id))
-                .DistributionOfVotesByPrice.FirstOrDefault(u => u.UserId == 1).Price;
+                .DistributionOfVotesByPrice.FirstOrDefault(u => u.UserId == services.UserId).Price;
             return voteuser;
         }
 

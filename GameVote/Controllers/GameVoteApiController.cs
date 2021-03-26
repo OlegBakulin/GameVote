@@ -9,6 +9,7 @@ using System.Net;
 using GameVote.Services.InMemory;
 using System.Collections;
 using GameVote.Services.DTO;
+using GameVote.Domain.DBServices.Interface;
 
 namespace GameVote.Controllers
 {
@@ -17,12 +18,19 @@ namespace GameVote.Controllers
     public class GameVoteApiController : ControllerBase, ISliceGameServices
     {
         private readonly ISliceGameServices _sliceGameServices;
-        public GameVoteApiController(ISliceGameServices gamesForTitlePage) => _sliceGameServices = gamesForTitlePage;
+        private readonly IDBServices services;
+        public GameVoteApiController(ISliceGameServices gamesForTitlePage, IDBServices _services)
+        {
+            _sliceGameServices = gamesForTitlePage;
+            services = _services;
+        }
         
         
         private readonly List<GamesForTitlePage> _gamesForTitlePage;
         private readonly InMemorySliceGameServices memorySliceGameServices;
         
+
+
         [Route("All")]
         [HttpGet]
         public IEnumerable<GamesForTitlePage> Get()//IActionResult Index()

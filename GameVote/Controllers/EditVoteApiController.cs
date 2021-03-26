@@ -24,6 +24,7 @@ namespace GameVote.Controllers
         [HttpPost("Insert")]
         public void VoteInsert([FromBody] Vote vote)//
         {
+            vote.User.Id = services.UserId;
             services.InsertVote(vote);
         }
 
@@ -31,6 +32,7 @@ namespace GameVote.Controllers
         [HttpPut("Redact")]
         public void VoteDeleteInsert([FromBody] Vote vote)
         {
+            vote.User.Id = services.UserId;
             services.DeleteVote(vote);
             services.InsertVote(vote);
         }
@@ -39,6 +41,7 @@ namespace GameVote.Controllers
         [HttpDelete("Delete")]
         public void VoteDelete([FromBody] Vote vote)
         {
+            vote.User.Id = services.UserId;
             services.DeleteVote(vote);
         }
     }

@@ -12,5 +12,6 @@ namespace GameVote.Domain.DBServices.Interface
         public List<GamesForTitlePage> GetGamesForTitlePage(int gameId, int storeId);
         public bool InsertVote(Vote vote);
         public bool DeleteVote(Vote vote);
+        public int UserId { get; set; }
     }
 }
